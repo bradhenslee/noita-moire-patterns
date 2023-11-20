@@ -27,7 +27,7 @@
 }
 
 /* .eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
-/* .eyeclouds .eye:hover a {
+.eyeclouds .eye:hover a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
     color: red !important;
@@ -35,7 +35,7 @@
     left: 50%;
     top: 20%;
     visibility: visible;
-} */
+}
 .container { display: table-cell; }
 .wrapper { display: grid; }
     
