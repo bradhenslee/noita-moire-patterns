@@ -1,0 +1,41 @@
+
+#eyeclouds { max-width: 1886px; width: 1886px; display: flex;}
+#eyecloud-right, #eyecloud-left { width: 946px;  }
+.eye { image-rendering: pixelated; 
+    background-size: contain;
+     width: 946px;
+     /* margin-bottom: -28px;  */
+     /* margin-right: -28px;  */
+    }
+#east1, #east1x { height: 112px; background-image: url(../images/east1.png); }
+#east2, #east2x { height: 140px; background-image: url(../images/east2.png); }
+#east3, #east3x { height: 168px; background-image: url(../images/east3.png); }
+#east4, #east4x { height: 140px; background-image: url(../images/east4.png); }
+#east5, #east5x { height: 140px; background-image: url(../images/east5.png); }
+#west1, #west1x { height: 112px; background-image: url(../images/west1.png); }
+#west2, #west2x { height: 112px; background-image: url(../images/west2.png); }
+#west3, #west3x { height: 140px; background-image: url(../images/west3.png); }
+#west4, #west4x { height: 140px; background-image: url(../images/west4.png); }
+#east1x, #east2x, #east3x, #east4x, #east5x, #west1x, #west2x, #west3x, #west4x, .mirror {
+    transform: rotate(0.5turn);
+    box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0;    
+}
+
+.eye a {
+    visibility: hidden;
+    /* display: none; */
+}
+
+/* .eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
+/* .eyeclouds .eye:hover a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: xx-large;
+    color: red !important;
+    position: relative;
+    left: 50%;
+    top: 20%;
+    visibility: visible;
+} */
+.container { display: table-cell; }
+.wrapper { display: grid; }
+    
