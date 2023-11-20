@@ -1,9 +1,9 @@
-
+.page { width: 100%; }
 #eyeclouds { max-width: 1886px; width: 1886px; display: flex;}
 #eyecloud-right, #eyecloud-left { width: 946px;  }
 .eye { image-rendering: pixelated; 
-    background-size: contain;
-     width: 946px;
+       background-size: cover;
+       width: 946px;
      /* margin-bottom: -28px;  */
      /* margin-right: -28px;  */
     }
@@ -16,10 +16,13 @@
 #west2, #west2x { height: 112px; background-image: url(../images/west2.png); }
 #west3, #west3x { height: 140px; background-image: url(../images/west3.png); }
 #west4, #west4x { height: 140px; background-image: url(../images/west4.png); }
-#east1x, #east2x, #east3x, #east4x, #east5x, #west1x, #west2x, #west3x, #west4x, .mirror {
-    transform: rotate(0.5turn);
-    box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0;    
+#east1x, #east2x, #east3x, #east4x, #east5x, #west1x, #west2x, #west3x, #west4x {
+        transform: matrix(-1, 0, 0, 1, 0, 0);
 }
+
+/* .mirror {
+    transform: matrix();
+} */
 
 .eye a {
     visibility: hidden;
@@ -27,7 +30,7 @@
 }
 
 /* .eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
-.eyeclouds .eye:hover a {
+.eye:hover a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
     color: red !important;

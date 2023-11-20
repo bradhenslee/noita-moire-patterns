@@ -1,6 +1,6 @@
 var drake = dragula([document.getElementById("eyecloud-right"), document.getElementById("eyecloud-left")], 
     (x)=> {
-
+        // console.log('drake is example name of dragula's api, will hook into drag events in these callbacks', x);
     } 
 );
 var log = document.getElementById("log");    
