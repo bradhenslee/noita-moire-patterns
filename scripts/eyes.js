@@ -1,13 +1,41 @@
-var drake = dragula([document.getElementById("eyecloud-right"), document.getElementById("eyecloud-left")], 
-    (x)=> {
+
+const rightEyes = document.getElementById("eyecloud-right");
+const leftEyes = document.getElementById("eyecloud-left");
+const diamond = document.getElementById("diamond");
+const altars = document.getElementById("altars");
+const log = document.getElementById("log");    
+const drake = dragula([rightEyes, leftEyes], (x)=> { 
         // console.log('drake is example name of dragula's api, will hook into drag events in these callbacks', x);
-    } 
-);
-var log = document.getElementById("log");    
+});
+
+// const form = document.querySelector("form");
+// form.addEventListener("change", (e) => {
+//     e.preventDefault();
+//     // debugger;
+//     let changedProp = e.target.name;
+//     let changedValue = (e.target.type == "checkbox") ? e.target.checked : e.target.value;
+//     changeHandler(changedProp, changedValue);
+// });
+
+function changeHandler(propName, el) {
+    
+    if (propName === 'checkbox-diamond') {
+        setProp('rightoverlap')
+    }
+    setProp(el.name, el.value);
+}
+
+function setProp(elId, val) {
+    if (val) {
+        document.getElementById(elId).classList.add(prop);
+    } else {
+        document.getElementById(elId).classList.remove(prop);
+    }
+}
 
 // Rotate element 1/4 turn
 function notiaRotate(el, event){
-    var currentAngle = el.style['-webkit-transform']
+    let currentAngle = el.style['-webkit-transform']
     el.style.transform = (currentAngle === '') ? 'rotate(0.25turn)'  
 : (currentAngle === 'rotate(0.25turn)') ? 'rotate(0.5turn)' 
 : (currentAngle === 'rotate(0.5turn)') ? 'rotate(0.75turn)' 
@@ -15,7 +43,7 @@ function notiaRotate(el, event){
 }
 
 // Mouse handler
-var eyes = document.getElementById('eyeclouds');
+let eyes = document.getElementById('eyeclouds');
 // eyes.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } ); 
 eyes.addEventListener("mouseup", (e) => {
     switch (e.button) {

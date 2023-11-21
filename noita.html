@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <head>
+
     <link rel="stylesheet" href="./styles/eyes.css">
     <link rel="stylesheet" href="./styles/dragula.css">
 </head>
 <body>
     <div class="page">
+    <!-- <form id="eyes">
+        <input id="checkbox-overlap" type="checkbox" name="overlap" />
+        <label for="checkbox-overlap">Overlap Right</label>
+        <input id="range-overlap" type="range" min="-1000" max="1000" step="1" value="0" />
+        <label for="range-overlap">Overlap Amount</label>
+        <input id="checkbox-flip-90" type="checkbox" name="flip-90" />
+        <label for="checkbox-flip-90">Flip 90 degrees</label>
+        <input id="checkbox-mirror" type="checkbox"  name="mirror" />
+        <label for="checkbox-mirror">Mirror horizontally</label>
+        <input id="checkbox-borders" type="checkbox" name="borders" />
+        <label for="checkbox-borders">Hide cloud names/borders</label>
+        <input id="checkbox-diamond" type="checkbox" name="diamond" />
+        <label for="checkbox-diamond">Hide diamond</label>
+        <input id="checkbox-altars" type="checkbox" name="altars" />
+        <label for="checkbox-altars">Hide altars</label>
+        
+    </form> -->
     <div id="log"> Alt + Left Click to rotate, click and drag to move. Initial copies to left are horizontally mirrored copies of the right (more options TK). </div>
     <div id="eyeclouds" >
         <div id="eyecloud-left" class="wrapper">
-            <div class="container"><div class="eye" id="east5x"><a href="#">EAST 5</a></div></div>
-            <div class="container"><div class="eye" id="east2x"><a href="#">EAST 2</a></div></div>
-            <div class="container"><div class="eye" id="west4x"><a href="#">WEST 4</a></div></div>
-            <div class="container"><div class="eye" id="west3x"><a href="#">WEST 3</a></div></div>
-            <div class="container"><div class="eye" id="west2x"><a href="#">WEST 2</a></div></div>
-            <div class="container"><div class="eye" id="west1x"><a href="#">WEST 1</a></div></div>
-            <div class="container"><div class="eye" id="east1x"><a href="#">EAST 1</a></div></div>
-            <div class="container"><div class="eye" id="east4x"><a href="#">EAST 4</a></div></div>
-            <div class="container"><div class="eye" id="east3x"><a href="#">EAST 3</a></div></div>
+            <div id="altars"></div>
+            <div id="diamond"></div>
+            <div class="container"><div class="eye" id="east5x"><a href="#">E5</a></div></div>
+            <div class="container"><div class="eye" id="east2x"><a href="#">E2</a></div></div>
+            <div class="container"><div class="eye" id="west4x"><a href="#">W4</a></div></div>
+            <div class="container"><div class="eye" id="west3x"><a href="#">W3</a></div></div>
+            <div class="container"><div class="eye" id="west2x"><a href="#">W2</a></div></div>
+            <div class="container"><div class="eye" id="west1x"><a href="#">W1</a></div></div>
+            <div class="container"><div class="eye" id="east1x"><a href="#">E1</a></div></div>
+            <div class="container"><div class="eye" id="east4x"><a href="#">E4</a></div></div>
+            <div class="container"><div class="eye" id="east3x"><a href="#">E3</a></div></div>
         </div>
         <div id="eyecloud-right" class="wrapper">
-            <div class="container"><div class="eye" id="east5"><a href="#">EASTx5</a></div></div>
-            <div class="container"><div class="eye" id="east2"><a href="#">EASTx2</a></div></div>
-            <div class="container"><div class="eye" id="west4"><a href="#">WESTx4</a></div></div>
-            <div class="container"><div class="eye" id="west3"><a href="#">WESTx3</a></div></div>
-            <div class="container"><div class="eye" id="west2"><a href="#">WESTx2</a></div></div>
-            <div class="container"><div class="eye" id="west1"><a href="#">WESTx1</a></div></div>
-            <div class="container"><div class="eye" id="east1"><a href="#">EASTx1</a></div></div>
-            <div class="container"><div class="eye" id="east4"><a href="#">EASTx4</a></div></div>
-            <div class="container"><div class="eye" id="east3"><a href="#">EASTx3</a></div></div>
+            <div class="container"><div class="eye" id="east5"><a href="#">E5</a></div></div>
+            <div class="container"><div class="eye" id="east2"><a href="#">E2</a></div></div>
+            <div class="container"><div class="eye" id="west4"><a href="#">W4</a></div></div>
+            <div class="container"><div class="eye" id="west3"><a href="#">W3</a></div></div>
+            <div class="container"><div class="eye" id="west2"><a href="#">W2</a></div></div>
+            <div class="container"><div class="eye" id="west1"><a href="#">W1</a></div></div>
+            <div class="container"><div class="eye" id="east1"><a href="#">E1</a></div></div>
+            <div class="container"><div class="eye" id="east4"><a href="#">E4</a></div></div>
+            <div class="container"><div class="eye" id="east3"><a href="#">E3</a></div></div>
         </div>
-    </div></div>
+    </div>
+    </div>
     <script src='./scripts/dragula.min.js'></script>
     <script src='./scripts/eyes.js'></script>
 
