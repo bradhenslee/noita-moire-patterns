@@ -3,15 +3,19 @@
 #eyecloud-right, #eyecloud-left { width: 946px;  }
 .eye { 
     image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;    
-       background-size: contain;
-       background-repeat: no-repeat;
-       width: 946px;
-       z-index: 10;
-
-     /* margin-bottom: -28px;  */
-     /* margin-right: -28px;  */
-    }
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 946px;
+    z-index: 10;
+}
+ul { margin: 0; padding: 0;}
+ul li {
+    display: flex;
+    list-style: none;
+    border: yellowgreen 2px dashed;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;}
 
 #east1, #east1x { height: 112px; content: url(../images/east1.png); }
 #east2, #east2x { height: 140px; content: url(../images/east2.png); }
@@ -40,14 +44,18 @@
     transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 .wtf {
-    /* transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 20, -1, -8, -4, -5, 9); */
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 20, -1, -8, -4, -5, 9);
 
     /* transform: matrix3d(1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1) !important; */
 }
 /* .mirror {
     transform: matrix();
+
+
 } */
+
 #diamond {
+    visibility: hidden;
     background-image: url(../images/diamond-cleared.png);
     image-rendering: pixelated;
     background-size: contain;
@@ -60,6 +68,7 @@
     z-index: -1;
 }
 #altars {
+    visibility: hidden;
     background-image: url(../images/skull-altars.png);
     image-rendering: pixelated;
     background-size: contain;
@@ -71,8 +80,13 @@
     scale: 2;
     z-index: -2;
 }
-.eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; }
-.eye a {
+
+.show { visibility: visible !important; }
+
+/* .eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
+.borders { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; }
+/* .borders { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
+.labels .eye a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: xx-large;
     color: red !important;
@@ -81,5 +95,22 @@
     top: 20%;
     visibility: visible;
 }
+.overlap { position: absolute; }
 .container { display: table-cell; }
 .wrapper { display: grid; }
+.hide { visibility: hidden; }
+.controls { background-color: midnightblue; 
+    color: white; margin: 20px; padding: 10px; border: 2px green dotted; z-index: 111;
+    position: fixed;
+    display: flex;
+    width: 300px;
+    right: 10px;
+    bottom: 10px;
+    font-size: xx-small;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+
+
