@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <g id="svg-eye">
+      <rect width="1" height="1" x="4"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="5"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="6"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="2"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="3"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="7"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="8"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="1"  y="2" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="9"  y="2" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="0"  y="3" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="10" y="3" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="1"  y="4" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="9"  y="4" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="2"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="3"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="7"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="8"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="4"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="5"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="6"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+    </g>
+  </defs>
+</svg>

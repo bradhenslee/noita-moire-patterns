@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 200 946px" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="pppixelate-pattern" width="12" height="14" patternUnits="userSpaceOnUse"
+      patternTransform="translate(0 0) scale(1) rotate(0)" shape-rendering="crispEdges">
+      <rect width="1" height="1" x="4"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="5"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="6"  y="0" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="2"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="3"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="7"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="8"  y="1" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="1"  y="2" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="9"  y="2" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="0"  y="3" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="10" y="3" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="1"  y="4" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="9"  y="4" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="2"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="3"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="7"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="8"  y="5" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="4"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="5"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+      <rect width="1" height="1" x="6"  y="6" fill="hsl(0, 0%, 0%)"></rect>
+    </pattern>
+  </defs>
+  <rect width="946px" height="100%" fill="url(#pppixelate-pattern)"></rect>
+    <rect width="946px" height="100%" fill="url(#pppixelate-pattern)" transform="translate(-6 -7)"></rect>
+</svg>

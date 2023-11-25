@@ -10,8 +10,8 @@
 
             <form id="eyes">
                 <div id="log"><strong>Noita Moire Pattern Generator</strong><br> Alt + Left Click to rotate a cloud, click and drag to move. Copies on the left are horizontally mirrored copies of the right.</div>    
-                <ul><li>
-
+                <ul>
+                <li>
                     <input id="checkbox-overlap" type="checkbox" name="overlap" />
                     <label for="checkbox-overlap">Overlay right side</label>
                 </li>
@@ -20,8 +20,7 @@
                     <label for="range-overlap">Overlay offset (px)</label>
                 </li>
                 <!-- 
-                <li> 
-                        
+                <li>   
                         <input id="checkbox-rightangle" type="checkbox" name="rightangle" />
                         <label for="checkbox-rightangle">Right pieces rotated 90 degrees</label>
                    </li>
@@ -33,11 +32,15 @@
                         <input id="checkbox-mirror-v" type="checkbox"  name="mirrorv" />
                         <label for="checkbox-mirror-v">Right pieces mirrored vertically</label>
                      </li>
-                <li>   
-                        <input id="checkbox-borders" type="checkbox" name="borders" />
-                        <label for="checkbox-borders">Hide cloud names/borders</label> 
+                    -->
+                    <li>   
+                        <input id="checkbox-borders" type="checkbox" name="labels" />
+                        <label for="checkbox-labels">Hide cloud names</label> 
                     </li>
-                -->
+                    <li>   
+                            <input id="checkbox-borders" type="checkbox" name="borders" />
+                            <label for="checkbox-borders">Hide borders</label> 
+                        </li>
                     <li>    
                         <input id="checkbox-diamond" type="checkbox" name="diamond" />
                         <label for="checkbox-diamond">Hide diamond</label>
@@ -45,6 +48,10 @@
                     <li>    
                         <input id="checkbox-altars" type="checkbox" name="altars" />
                         <label for="checkbox-altars">Hide altars</label>
+                    </li>
+                    <li>    
+                        <input id="checkbox-trigrams" type="checkbox" name="trigram" />
+                        <label for="checkbox-trigrams">Show trigram paths</label>
                     </li>
                 </ul>
                 
@@ -55,26 +62,26 @@
         <div id="eyecloud-left" class="wrapper">
             <div id="altars" class="show"></div>
             <div id="diamond" class="show"></div>
-            <div class="container"><div class="eye" id="east5x"><a href="#">E5</a></div></div>
-            <div class="container"><div class="eye" id="east2x"><a href="#">E2</a></div></div>
-            <div class="container"><div class="eye" id="west4x"><a href="#">W4</a></div></div>
-            <div class="container"><div class="eye" id="west3x"><a href="#">W3</a></div></div>
-            <div class="container"><div class="eye" id="west2x"><a href="#">W2</a></div></div>
-            <div class="container"><div class="eye" id="west1x"><a href="#">W1</a></div></div>
-            <div class="container"><div class="eye" id="east1x"><a href="#">E1</a></div></div>
-            <div class="container"><div class="eye" id="east4x"><a href="#">E4</a></div></div>
-            <div class="container"><div class="eye" id="east3x"><a href="#">E3</a></div></div>
+            <div class="container"><p class="eye" id="east5x">E5</p></div>
+            <div class="container"><p class="eye" id="east2x">E2</p></div>
+            <div class="container"><p class="eye" id="west4x">W4</p></div>
+            <div class="container"><p class="eye" id="west3x">W3</p></div>
+            <div class="container"><p class="eye" id="west2x">W2</p></div>
+            <div class="container"><p class="eye" id="west1x">W1</p></div>
+            <div class="container"><p class="eye" id="east1x">E1</p></div>
+            <div class="container"><p class="eye" id="east4x">E4</p></div>
+            <div class="container"><p class="eye" id="east3x">E3</p></div>
         </div>
         <div id="eyecloud-right" class="wrapper" >
-            <div class="container"><div class="eye" id="east5"><a href="#">E5</a></div></div>
-            <div class="container"><div class="eye" id="east2"><a href="#">E2</a></div></div>
-            <div class="container"><div class="eye" id="west4"><a href="#">W4</a></div></div>
-            <div class="container"><div class="eye" id="west3"><a href="#">W3</a></div></div>
-            <div class="container"><div class="eye" id="west2"><a href="#">W2</a></div></div>
-            <div class="container"><div class="eye" id="west1"><a href="#">W1</a></div></div>
-            <div class="container"><div class="eye" id="east1"><a href="#">E1</a></div></div>
-            <div class="container"><div class="eye" id="east4"><a href="#">E4</a></div></div>
-            <div class="container"><div class="eye" id="east3"><a href="#">E3</a></div></div>
+            <div class="container"><p class="eye" id="east5">E5</p></div>
+            <div class="container"><p class="eye" id="east2">E2</p></div>
+            <div class="container"><p class="eye" id="west4">W4</p></div>
+            <div class="container"><p class="eye" id="west3">W3</p></div>
+            <div class="container"><p class="eye" id="west2">W2</p></div>
+            <div class="container"><p class="eye" id="west1">W1</p></div>
+            <div class="container"><p class="eye" id="east1">E1</p></div>
+            <div class="container"><p class="eye" id="east4">E4</p></div>
+            <div class="container"><p class="eye" id="east3">E3</p></div>
         </div>
     </div>
     </div>

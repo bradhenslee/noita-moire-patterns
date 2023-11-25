@@ -17,7 +17,7 @@ ul li {
     padding: 5px;
     margin: 5px;}
 
-#east1, #east1x { height: 112px; content: url(../images/east1.png); }
+/* #east1, #east1x { height: 112px; content: url(../images/east1.png); }
 #east2, #east2x { height: 140px; content: url(../images/east2.png); }
 #east3, #east3x { height: 168px; content: url(../images/east3.png); }
 #east4, #east4x { height: 140px; content: url(../images/east4.png); }
@@ -25,9 +25,9 @@ ul li {
 #west1, #west1x { height: 112px; content: url(../images/west1.png); }
 #west2, #west2x { height: 112px; content: url(../images/west2.png); }
 #west3, #west3x { height: 140px; content: url(../images/west3.png); }
-#west4, #west4x { height: 140px; content: url(../images/west4.png); }
+#west4, #west4x { height: 140px; content: url(../images/west4.png); } */
 
-/* 
+ 
 #east1, #east1x { height: 112px; background-image: url(../images/east1.png); }
 #east2, #east2x { height: 140px; background-image: url(../images/east2.png); }
 #east3, #east3x { height: 168px; background-image: url(../images/east3.png); }
@@ -37,7 +37,10 @@ ul li {
 #west2, #west2x { height: 112px; background-image: url(../images/west2.png); }
 #west3, #west3x { height: 140px; background-image: url(../images/west3.png); }
 #west4, #west4x { height: 140px; background-image: url(../images/west4.png); } 
-*/
+
+p { 
+    
+}
 
 #east1x, #east2x, #east3x, #east4x, #east5x, #west1x, #west2x, #west3x, #west4x {
     z-index: 6;
@@ -84,17 +87,27 @@ ul li {
 .show { visibility: visible !important; }
 
 /* .eyecloud .eye:hover { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
-.borders { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; }
+.borders #eyecloud-left > * .eye  { box-shadow: blue inset 1px 1px 0 0, blue inset -1px -1px 0 0; }
+.borders #eyecloud-right > * .eye  { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; }
+
 /* .borders { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
-.labels .eye a {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: xx-large;
-    color: red !important;
-    position: relative;
-    left: 50%;
-    top: 20%;
+.labels * p.eye {
+    
     visibility: visible;
+  
+ 
 }
+p.eye {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    color: red;
+    z-index: 11111111;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: wavy;
+}
+
 .overlap { position: absolute; }
 .container { display: table-cell; }
 .wrapper { display: grid; }
