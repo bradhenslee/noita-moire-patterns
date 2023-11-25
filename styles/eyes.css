@@ -17,6 +17,11 @@ ul li {
     padding: 5px;
     margin: 5px;}
 
+/* .svgcloud * use {
+    height: 7px;
+    width: 13px;    
+} */
+
 /* #east1, #east1x { height: 112px; content: url(../images/east1.png); }
 #east2, #east2x { height: 140px; content: url(../images/east2.png); }
 #east3, #east3x { height: 168px; content: url(../images/east3.png); }
