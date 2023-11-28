@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 11.000001 7"
+   shape-rendering="crispEdges"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="eyeforward-t.svg"
+   width="11.000001"
+   height="7"
+   inkscape:version="1.3.1 (91b66b0, 2023-11-16)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="30.923077"
+     inkscape:cx="6.5161692"
+     inkscape:cy="4.4950249"
+     inkscape:window-width="1392"
+     inkscape:window-height="993"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <path
+     stroke="#000000"
+     d="m 4,0.5 h 3 m -5,1 h 2 m 3,0 h 2 m -8.00000005,1 H 2 m 3,0 h 1 m 3,0 h 1.000001 M 0,3.5 H 0.99999995 M 4,3.5 h 3 m 3.000001,0 h 1 M 0.99999995,4.5 H 2 m 3,0 h 1 m 3,0 h 1.000001 M 2,5.5 h 2 m 3,0 h 2 m -5,1 h 3"
+     id="path1" />
+</svg>

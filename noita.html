@@ -5,35 +5,9 @@
     <link rel="stylesheet" href="./styles/dragula.css">
 </head>
 <body>
-    <div>
 
-        <div class="svgcloud">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0">
-            <symbol id="eye-d" viewBox="0 0 11 7" shape-rendering="crispEdges">
-                <path stroke="#000000" d="M4 0h3M2 1h2M7 1h2M1 2h1M9 2h1M0 3h1M5 3h1M10 3h1M1 4h1M4 4h3M9 4h1M2 5h2M5 5h1M7 5h2M4 6h3" />
-            </symbol>
-            <symbol id="eye-o" viewBox="0 0 11 7" shape-rendering="crispEdges">
-                <path stroke="#000000" d="M4 0h3M2 1h2M7 1h2M1 2h1M5 2h1M9 2h1M0 3h1M4 3h3M10 3h1M1 4h1M5 4h1M9 4h1M2 5h2M7 5h2M4 6h3" />
-            </symbol>
-            <symbol id="eye-l" viewBox="0 0 11 7" shape-rendering="crispEdges">
-                <path stroke="#000000" d="M4 0h3M2 1h2M7 1h2M1 2h1M4 2h1M9 2h1M0 3h1M3 3h3M10 3h1M1 4h1M4 4h1M9 4h1M2 5h2M7 5h2M4 6h3" />
-            </symbol>
-            <symbol id="eye-r" viewBox="0 0 11 7" shape-rendering="crispEdges">
-                <path stroke="#000000" d="M4 0h3M2 1h2M7 1h2M1 2h1M6 2h1M9 2h1M0 3h1M5 3h3M10 3h1M1 4h1M6 4h1M9 4h1M2 5h2M7 5h2M4 6h3" />
-            </symbol>
-            <symbol id="eye-u" viewBox="0 0 11 7" shape-rendering="crispEdges">
-                <path stroke="#000000" d="M4 0h3M2 1h2M5 1h1M7 1h2M1 2h1M4 2h3M9 2h1M0 3h1M5 3h1M10 3h1M1 4h1M9 4h1M2 5h2M7 5h2M4 6h3" />
-            </symbol>
-            <use href="#eye-o" x="0" />
-            <use href="#eye-d" x="14" />
-            <use href="#eye-l" x="28" />
-            <use href="#eye-u" x="56" />
-            <use href="#eye-l" x="70" />
-            <use href="#eye-l" x="84" />
-            <use href="#eye-l" x="96" />
-            <use href="#eye-u" x="112" />
-        </svg>
-</div>
+        <div id="svg-cloud-layer">            
+        </div>
 
 
 <div class="page"  style="display: none;">
@@ -50,20 +24,7 @@
                     <input id="range-overlap" type="range" min="-1000" max="1000" step="1" value="0" />
                     <label for="range-overlap">Overlay offset (px)</label>
                 </li>
-                <!-- 
-                <li>   
-                        <input id="checkbox-rightangle" type="checkbox" name="rightangle" />
-                        <label for="checkbox-rightangle">Right pieces rotated 90 degrees</label>
-                   </li>
-                <li>     
-                        <input id="checkbox-mirror-h" type="checkbox"  name="mirrorh" />
-                        <label for="checkbox-mirror-h">Right pieces mirrored horizontally</label>
-                    </li>
-                <li>    
-                        <input id="checkbox-mirror-v" type="checkbox"  name="mirrorv" />
-                        <label for="checkbox-mirror-v">Right pieces mirrored vertically</label>
-                     </li>
-                    -->
+                <!-- <li> <input id="checkbox-rightangle" type="checkbox" name="rightangle" /> <label for="checkbox-rightangle">Right pieces rotated 90 degrees</label> </li> <li> <input id="checkbox-mirror-h" type="checkbox"  name="mirrorh" /> <label for="checkbox-mirror-h">Right pieces mirrored horizontally</label> </li> <li> <input id="checkbox-mirror-v" type="checkbox"  name="mirrorv" /> <label for="checkbox-mirror-v">Right pieces mirrored vertically</label> </li> -->
                     <li>   
                         <input id="checkbox-borders" type="checkbox" name="labels" />
                         <label for="checkbox-labels">Hide cloud names</label> 

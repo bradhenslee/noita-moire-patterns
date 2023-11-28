@@ -1,26 +1,22 @@
-.page { width: 100%; }
-#eyeclouds { max-width: 1886px; width: 1886px; display: flex;}
-#eyecloud-right, #eyecloud-left { width: 946px;  }
-.eye { 
-    image-rendering: pixelated;
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 946px;
-    z-index: 10;
-}
-ul { margin: 0; padding: 0;}
-ul li {
-    display: flex;
-    list-style: none;
-    border: yellowgreen 2px dashed;
-    align-items: center;
-    padding: 5px;
-    margin: 5px;}
 
-/* .svgcloud * use {
-    height: 7px;
-    width: 13px;    
-} */
+.svg-cloud-row {
+    height: 8px;  /* critical: sets eye height and makes 1px vertical padding between rows*/
+}
+
+.svg-cloud-row div {
+    width: 11px;        /* critical: sets eye width dimensions */
+    padding-right: 1px; /* critical: makes 1px horizontal spacing between each eye in a row*/
+    display: inline-flex;
+}
+.svg-cloud-row:nth-child(2n) {
+    padding-left: 6px;  /* critical: offset the even rows 6px */
+}
+.svg-cloud-row div.o { content: url("../images/eyeforward-t.svg") }
+.svg-cloud-row div.u { content: url("../images/eyeup-t.svg") }
+.svg-cloud-row div.d { content: url("../images/eyedown-t.svg") }
+.svg-cloud-row div.r { content: url("../images/eyeright-t.svg") }
+.svg-cloud-row div.l { content: url("../images/eyeleft-t.svg") }
+
 
 /* #east1, #east1x { height: 112px; content: url(../images/east1.png); }
 #east2, #east2x { height: 140px; content: url(../images/east2.png); }
@@ -32,35 +28,8 @@ ul li {
 #west3, #west3x { height: 140px; content: url(../images/west3.png); }
 #west4, #west4x { height: 140px; content: url(../images/west4.png); } */
 
- 
-#east1, #east1x { height: 112px; background-image: url(../images/east1.png); }
-#east2, #east2x { height: 140px; background-image: url(../images/east2.png); }
-#east3, #east3x { height: 168px; background-image: url(../images/east3.png); }
-#east4, #east4x { height: 140px; background-image: url(../images/east4.png); }
-#east5, #east5x { height: 140px; background-image: url(../images/east5.png); }
-#west1, #west1x { height: 112px; background-image: url(../images/west1.png); }
-#west2, #west2x { height: 112px; background-image: url(../images/west2.png); }
-#west3, #west3x { height: 140px; background-image: url(../images/west3.png); }
-#west4, #west4x { height: 140px; background-image: url(../images/west4.png); } 
 
-p { 
-    
-}
-
-#east1x, #east2x, #east3x, #east4x, #east5x, #west1x, #west2x, #west3x, #west4x {
-    z-index: 6;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
-}
-.wtf {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 20, -1, -8, -4, -5, 9);
-
-    /* transform: matrix3d(1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 15, 0, 0, 1) !important; */
-}
-/* .mirror {
-    transform: matrix();
-
-
-} */
+ul { margin: 0; padding: 0;}
 
 #diamond {
     visibility: hidden;
@@ -96,22 +65,7 @@ p {
 .borders #eyecloud-right > * .eye  { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; }
 
 /* .borders { box-shadow: red inset 1px 1px 0 0, red inset -1px -1px 0 0; } */
-.labels * p.eye {
-    
-    visibility: visible;
-  
- 
-}
-p.eye {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: small;
-    color: red;
-    z-index: 11111111;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    text-decoration: wavy;
-}
+.labels * p.eye {visibility: visible;} 
 
 .overlap { position: absolute; }
 .container { display: table-cell; }
@@ -128,7 +82,10 @@ p.eye {
     font-family: 'Courier New', Courier, monospace;
 }
 
-
-
-
-
+ul.controls li {
+    display: flex;
+    list-style: none;
+    border: yellowgreen 2px dashed;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;}
