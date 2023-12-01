@@ -121,6 +121,18 @@ const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 
 const displayOrder = userOrders.trim().split(' ');
 
 
+function moveDiv(vh) {
+    let el = document.getElementById('svg-cloud-layer-r');
+    let top = el.offsetTop
+    let left = el.offsetLeft
+    if (vh[0] == -1) el.style.top = top - 1 + 'px'
+    if (vh[0] == 1) el.style.top = top + 1 + 'px'
+    if (vh[1] == -1) el.style.left = left - 1 + 'px'
+    if (vh[1] == 1) el.style.left = left + 1 + 'px'
+}
+
+const layerPosition = [];
+
 
 
 btnSaveOrder.addEventListener("click", (e) => {
@@ -226,12 +238,23 @@ const saveOrder = () => {
 }
 
 function addLayer() {
-    let newLayer = svgCloudsLeft.cloneNode(true)
-    newLayer.id = "svg-cloud-layer-r";
-    newLayer.style.transform = "rotate(0.25turn)";
-    newLayer.classList = "wrapper"
-    svgCloudsLeft.parentElement.appendChild(newLayer);
+    let newLayer = svgCloudsLeft.cloneNode(true)  
+    newLayer.id = 'svg-cloud-layer-r';  
+    svgCloudsRight.replaceWith(newLayer);
+
+    document.addEventListener("keydown", function(e) {
+        if (Object.keys(moveKeys).includes(e.key)) {
+            e.preventDefault();
+            moveDiv(moveKeys[e.key])}
+    });
+    
 }
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 
 
+const moveKeys = {
+    "ArrowUp": [-1,0],
+    "ArrowDown": [1,0],
+    "ArrowLeft": [0,-1],
+    "ArrowRight": [0,1]
+    }
