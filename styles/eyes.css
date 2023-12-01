@@ -1,6 +1,36 @@
+body {
+    font-family: sans-serif;
+}
+button {
+    border-radius: 8px;
+    border-style: none;
+    /* font-family: sans-serif; */
+    margin: 10px;
+}
+#svg-layer-controls, #messages {    
+    color: white;
+    background-color: royalblue;
+    display: inline-block; 
+    width: 100%;
+    text-align: center;
+    animation: opacity 100 ease-in-out 0 ;
+
+}
+.container {
+    width: 474px;
+    display: table-cell; 
+ /* border: 1px red solid; */
+}
+.wrapper { display: grid; }  
+
+.svg-cloud {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px blue dotted; */
+}
 
 .svg-cloud-row {
-    height: 8px;  /* critical: sets eye height and makes 1px vertical padding between rows*/
+    display: flex;
 }
 
 .svg-cloud-row div {
@@ -8,25 +38,22 @@
     padding-right: 1px; /* critical: makes 1px horizontal spacing between each eye in a row*/
     display: inline-flex;
 }
+
 .svg-cloud-row:nth-child(2n) {
-    padding-left: 6px;  /* critical: offset the even rows 6px */
+    padding-left: 6px;  /* critical: offset the even rows 6px to match game display, changing from appearance from grid to trigrams */
 }
-.svg-cloud-row div.o { content: url("../images/eyeforward-t.svg") }
-.svg-cloud-row div.u { content: url("../images/eyeup-t.svg") }
-.svg-cloud-row div.d { content: url("../images/eyedown-t.svg") }
-.svg-cloud-row div.r { content: url("../images/eyeright-t.svg") }
-.svg-cloud-row div.l { content: url("../images/eyeleft-t.svg") }
 
+.svg-cloud-row div.o { background-color: teal; content: url("../images/eyeforward-t.svg") }
+.svg-cloud-row div.u { background-color: orchid; content: url("../images/eyeup-t.svg") }
+.svg-cloud-row div.d { background-color: lemonchiffon; content: url("../images/eyedown-t.svg") }
+.svg-cloud-row div.r { background-color:navy; content: url("../images/eyeright-t.svg") }
+.svg-cloud-row div.l { background-color: powderblue; content: url("../images/eyeleft-t.svg") }
+/* TODO: add color controls */
+.svg-cloud-row div { background-color: rgba(0, 0, 0, 0) !important; }
 
-/* #east1, #east1x { height: 112px; content: url(../images/east1.png); }
-#east2, #east2x { height: 140px; content: url(../images/east2.png); }
-#east3, #east3x { height: 168px; content: url(../images/east3.png); }
-#east4, #east4x { height: 140px; content: url(../images/east4.png); }
-#east5, #east5x { height: 140px; content: url(../images/east5.png); }
-#west1, #west1x { height: 112px; content: url(../images/west1.png); }
-#west2, #west2x { height: 112px; content: url(../images/west2.png); }
-#west3, #west3x { height: 140px; content: url(../images/west3.png); }
-#west4, #west4x { height: 140px; content: url(../images/west4.png); } */
+/* 
+.e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
+*/
 
 
 ul { margin: 0; padding: 0;}
@@ -68,8 +95,6 @@ ul { margin: 0; padding: 0;}
 .labels * p.eye {visibility: visible;} 
 
 .overlap { position: absolute; }
-.container { display: table-cell; }
-.wrapper { display: grid; }
 .hide { visibility: hidden; }
 .controls { background-color: midnightblue; 
     color: white; margin: 20px; padding: 10px; border: 2px green dotted; z-index: 111;
@@ -89,3 +114,5 @@ ul.controls li {
     align-items: center;
     padding: 5px;
     margin: 5px;}
+
+
