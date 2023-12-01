@@ -196,7 +196,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
         el.addEventListener("mouseup", (e) => { 
             // if (e.altKey) rotateCloud(e.currentTarget, e); 
-             rotateCloud(e.currentTarget, e); 
+            rotateCloud(e.currentTarget, e); 
         });
     });   
 
@@ -227,10 +227,10 @@ const saveOrder = () => {
 
 function addLayer() {
     let newLayer = svgCloudsLeft.cloneNode(true)
-    newLayer.style.transform = "rotate(0.5turn)";
     newLayer.id = "svg-cloud-layer-r";
-    newLayer.style.position = "absolute"
-    
+    newLayer.style.transform = "rotate(0.25turn)";
+    newLayer.classList = "wrapper"
+    svgCloudsLeft.parentElement.appendChild(newLayer);
 }
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 
