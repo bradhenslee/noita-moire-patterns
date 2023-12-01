@@ -16,12 +16,6 @@ button {
     animation: opacity 100 ease-in-out 0 ;
 
 }
-#svg-cloud-layer-r {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    rotate: 0.25turn;
-}
 .container {
     width: 474px;
     display: table-cell; 
@@ -43,6 +37,7 @@ button {
     width: 11px;        /* critical: sets eye width dimensions */
     padding-right: 1px; /* critical: makes 1px horizontal spacing between each eye in a row*/
     display: inline-flex;
+    image-rendering: pixelated;
 }
 
 .svg-cloud-row:nth-child(2n) {
@@ -55,16 +50,23 @@ button {
 .svg-cloud-row div.r { background-color:navy; content: url("../images/eyeright-t.svg") }
 .svg-cloud-row div.l { background-color: powderblue; content: url("../images/eyeleft-t.svg") }
 /* TODO: add color controls */
-.svg-cloud-row div { background-color: rgba(0, 0, 0, 0) !important; }
+.svg-cloud-row div { image-rendering: pixelated; background-color: rgba(0, 0, 0, 0) !important; }
 
  
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
+#svg-cloud-layer-l {
+    position: absolute;
+    top: 100px;
+    left: 13px;
 
+}
 #svg-cloud-layer-r {
     position: absolute;
     top: 100px;
     left: 13px;
+    rotate: 0.25turn;
 }
+
 
 ul { margin: 0; padding: 0;}
 
