@@ -194,7 +194,10 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     // Mouse handler
     // eyes.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } ); 
     layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
-        el.addEventListener("mouseup", (e) => { if (e.altKey) rotateCloud(e.currentTarget, e); });
+        el.addEventListener("mouseup", (e) => { 
+            // if (e.altKey) rotateCloud(e.currentTarget, e); 
+             rotateCloud(e.currentTarget, e); 
+        });
     });   
 
     messages.textContent = `Loaded saved order:\n ${getCurrentOrder()}`;

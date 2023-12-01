@@ -19,7 +19,7 @@ button {
 .container {
     width: 474px;
     display: table-cell; 
- /* border: 1px red solid; */
+ border: 1px red solid;
 }
 .wrapper { display: grid; }  
 
@@ -51,9 +51,9 @@ button {
 /* TODO: add color controls */
 .svg-cloud-row div { background-color: rgba(0, 0, 0, 0) !important; }
 
-/* 
+ 
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
-*/
+
 
 
 ul { margin: 0; padding: 0;}
