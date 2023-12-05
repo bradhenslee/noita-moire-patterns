@@ -52,21 +52,17 @@ button {
 .svg-cloud-row span p { position: absolute; margin: 0;}
 .svg-cloud-row span:nth-child(3n - 1) p::after { 
     content: '\2571\2572';
-    font-size: 12px;
     color: blue;
-    position: absolute;
-    left: 6px; 
+    border-bottom: 1px solid blue;
+    left: 11px; 
 }
 .svg-cloud-row span:nth-child(3n + 1) p::after { 
     content: '\2572\2571';
-    font-size: 12px;
     color: red;
-    position: absolute;     
-
+    border-top: 1px solid red;
 }
 .svg-cloud-row:nth-of-type(2n) span:nth-child(3n-1) p::after { 
     content: none;
-    font-size: 16px;
     color: green;
     position: absolute;  
 }
@@ -78,7 +74,10 @@ button {
     position: absolute; 
     left: 6px;  */
 }
-
+.svg-cloud-row span p::after { position: absolute; font-size: 11px; font-family: monospace; 
+    transform: scale(2.5,1);
+    left: 5px;
+}
 /* .svg-cloud-row { background-image: ;} */
 .svg-cloud-row div.o { background-color: teal; content: url("../images/eyeforward-t.svg") }
 .svg-cloud-row div.u { background-color: orchid; content: url("../images/eyeup-t.svg") }
