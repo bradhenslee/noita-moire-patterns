@@ -28,12 +28,35 @@ button {
 .bordered .svg-cloud { box-shadow: blue inset 1px 1px 0 0, blue inset -1px -1px 0 0; }
 
 .svg-cloud-row {
-    overflow: visible;
     display: flex;
+}
+.svg-cloud-row span {
+}
+/* lol pride flags! */
+/* .svg-cloud-row span { background: linear-gradient( to right, red 20%, orange 20% 40%, yellow 40% 60%, green 60% 80%, blue 80% ); } */
+.svg-cloud-row span::after {
+    /* counter-reset: eyecounter 0;  */
+    /* counter-increment: eyecounter;
+    content: counters(eyecounter, ".") " ";
+    font-size: 6px;
+    background: azure;
+    z-index: 9;
+    border-radius: 1px;
+    left: -7px;
+    position: relative;     */
+}
+.svg-cloud-row:nth-child(2n) span:nth-child(3n - 1) { 
+    /* overflow: visible; */
+    /* background: linear-gradient( 90deg, red 20%, orange 20% 80%);  */
+}
+
+/* // 5, 6, 11, 12 */
+.svg-cloud-row:nth-child(2n) span:nth-child(3n) { 
+    /* overflow: visible; */
+    /* background: linear-gradient( 285deg, blue 20%, pink 20% 80%);  */
 }
 
 .svg-cloud-row span {
-    /* overflow: visible; */
     width: 11px;        /* critical: sets eye width dimensions */
     padding-right: 1px; /* critical: makes 1px horizontal spacing between each eye in a row*/
     display: inline-flex;

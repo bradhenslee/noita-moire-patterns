@@ -11,6 +11,16 @@ const eyeData = {
         "udddurroddouoduuduuuruuruodrrdul",
         "uduolrlrrludodoluuorodurdroldud"
     ], "w1": [
+    // "e1": [
+    //     "rououdrrddololuudordruuldudoddoolorlooo",
+    //     "odrolurroooulrrrlrurrrrouuooodroudluuud",
+    //     "duorruolloooroouololoullulroddorrodlrlu",
+    //     "rdudududooduudruroulrrduddulludlulluruu",
+    //     "ouloodruruuludooluuuouoorlurluooloduoou",
+    //     "olodduldrdluurruououoolourolurllrllrlor",
+    //     "udddurroddouoduuduuuruuruodrrdul",
+    //     "uduolrlrrludodoluuorodurdroldud"
+    // ], "w1": [
         "duuoudrrddololuudordruuldudoddoolorlool",
         "odrolurroooulrrrlrurrrrouuooodroudluuou",
         "ororouollooouololloloullulroddorrodludu",
@@ -170,34 +180,39 @@ function changeHandler(propName, newVal) {
 // parse data in custom order by cloud name as key 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
+    let cloudCount = 0;
     // for each cloud name build & add cloud
     displayOrder.map((cloudName) => {
-        let containerDiv = document.createElement("div");
-        containerDiv.setAttribute('class', 'container');
+        let cloudWrapper = document.createElement("div");
+        cloudWrapper.setAttribute('class', 'container');
         let cloudFrag = document.createDocumentFragment();
         let cloudDiv = document.createElement("div");
         let classes = `${cloudName} svg-cloud`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
+        let rowCount = 0;
         eyeData[cloudName].map(rowData => {
+            let eyeCount = 0;
             let rowFrag = document.createDocumentFragment();
             let rowDiv = document.createElement("div");
             rowDiv.setAttribute('class', 'svg-cloud-row');
             // for each row of data, build row of eyes 
             rowData.split('').map((eyeDirection) => {
                 let eyeWrap = document.createElement("span");
-                // let eyeImg = document.createElement("span");
-                // let eyeP = document.createElement("p");
+                eyeWrap.setAttribute('id', `cloud-${rowCount}_row-${rowCount}_eye-${eyeCount}`);
                 eyeWrap.innerHTML = `<div class="${eyeDirection}"></div><p></p>`
                 rowFrag.appendChild(eyeWrap);
+                eyeCount++;
             })
             rowDiv.appendChild(rowFrag);
             cloudFrag.appendChild(rowDiv);
+            rowCount++;
         })
         cloudDiv.appendChild(cloudFrag);
-        containerDiv.appendChild(cloudDiv);
-        eyeArrangementFrag.appendChild(containerDiv);
+        cloudWrapper.appendChild(cloudDiv);
+        eyeArrangementFrag.appendChild(cloudWrapper);
+        cloudCount++;
     });
     layerDiv.appendChild(eyeArrangementFrag);
     // Mouse handler
@@ -228,6 +243,8 @@ const getCurrentOrder = (eyeLayer) => {
     return order;
 }
 
+
+
 const saveOrder = () => {
     let order = getCurrentOrder();
     window.localStorage.setItem("eye-orders", order);
@@ -248,6 +265,7 @@ function addMirroredLayer() {
     svgCloudsLeft.parentElement.appendChild(right);
 }
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
+readEyeData(eyeData);
 
 
 const moveKeys = {
@@ -256,3 +274,35 @@ const moveKeys = {
     "ArrowLeft": [0,-1],
     "ArrowRight": [0,1]
     }
+
+function convertDirsToInts (str) { 
+    return str.replaceAll('o',0).replaceAll('u',1).replaceAll('r',2).replaceAll('d',3).replaceAll('l',4); 
+
+}
+
+function readEyeData(eyeData) {
+    let ret = {};
+    let clouds = Object.keys(eyeData);
+    clouds.map((cloudname, cloudNumber) => {
+        let cloudDatArr = [];
+        eyeData[cloudname].map((rowString, i, arr) => {
+            if (i%2) {
+                // debugger;
+                // get 2 rows at a time to read full trigrams
+                let topRow = convertDirsToInts(arr[i - 1]).split('');
+                let botRow = convertDirsToInts(rowString).split('');
+                let flat = topRow.flatMap((val, j) => [val, botRow[j]]);
+                cloudDatArr = cloudDatArr.concat(flat);
+                
+                // console.log("DATA:", i, topRow, botRow, cloudDatArr, ret)
+            }})
+            ret[cloudname] = cloudDatArr.join('');
+        }
+    )
+    console.table(ret)
+    // console.log(ret)
+    return ret;
+}
+    
+
+
