@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><html encoding="utf-8">
 <head>
 
     <link rel="stylesheet" href="./styles/eyes.css">
@@ -6,8 +6,16 @@
 </head>
 <body>
     <div id="svg-layer-controls">
-        <button type="button" id="save-order" >Save order</button>
-        <button type="button" id="add-layer">Show rotated overlay (move w/ arrow keys)</button></div>
+        <!-- <div id="move-controls">
+            <button type="button" id="btn-move-layer1">1</button>
+            <button type="button" id="btn-move-layer2">2</button>
+            <button type="button" id="btn-move-layer3">3</button>
+            <button type="button" id="btn-move-diamond">Diamond</button>
+        </div> -->
+            <button type="button" id="save-order" >Save order</button>
+        <button type="button" id="add-layer">Mirror the current layer horizontally and vertically</button>
+        <button type="button" id="add-mirrored-layer">Add another double layer mirroring 1 & 2</button>
+    </div>
         <div id="messages"></div>
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
         <div id="svg-cloud-layer-r" class="wrapper"></div>
@@ -50,16 +58,9 @@
             </form>
             
         </div>
-    <div id="eyeclouds" class="labels borders">
-        <div id="eyecloud-left" class="wrapper">
-            <div id="altars" class="show"></div>
-            <div id="diamond" class="show"></div>
-            
-        </div>
-        <div id="eyecloud-right" class="wrapper" >
-            
-        </div>
-    </div>
+        <div id="diamond" class="show"></div>
+        <div id="altars"></div>
+   
     </div>
     <script src='./scripts/dragula.min.js'></script>
     <script src='./scripts/eyes.js'></script>

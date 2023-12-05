@@ -117,12 +117,17 @@ const drake = dragula([svgCloudsLeft]).on('drag', function (el) {
 const form = document.querySelector("form");
 const btnSaveOrder = document.getElementById("save-order");
 const btnAddLayer = document.getElementById("add-layer");
+const btnAddMirroredLayer = document.getElementById("add-mirrored-layer");
 const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 w3 e4 w4 e5";
 const displayOrder = userOrders.trim().split(' ');
 
-
+document.addEventListener("keydown", function(e) {
+    if (Object.keys(moveKeys).includes(e.key)) {
+        e.preventDefault();
+        moveDiv(moveKeys[e.key])}
+});
 function moveDiv(vh) {
-    let el = document.getElementById('svg-cloud-layer-r');
+    let el = document.getElementById('diamond');
     let top = el.offsetTop
     let left = el.offsetLeft
     if (vh[0] == -1) el.style.top = top - 1 + 'px'
@@ -131,19 +136,9 @@ function moveDiv(vh) {
     if (vh[1] == 1) el.style.left = left + 1 + 'px'
 }
 
-const layerPosition = [];
-
-
-
-btnSaveOrder.addEventListener("click", (e) => {
-    saveOrder(getCurrentOrder());
-})
-
-btnAddLayer.addEventListener("click", (e) => {
-    addLayer();
-})
-
-
+btnSaveOrder.addEventListener("click", () => saveOrder(getCurrentOrder()) )
+btnAddLayer.addEventListener("click", () => addLayer() )
+btnAddMirroredLayer.addEventListener("click", () => addMirroredLayer() )
 form.addEventListener("change", (e) => {
     e.preventDefault();
     let changedProp = e.target.name || e.target.id;
@@ -191,9 +186,11 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
             rowDiv.setAttribute('class', 'svg-cloud-row');
             // for each row of data, build row of eyes 
             rowData.split('').map((eyeDirection) => {
-                let eyeDiv = document.createElement("div");
-                eyeDiv.setAttribute('class', eyeDirection);
-                rowFrag.appendChild(eyeDiv);
+                let eyeWrap = document.createElement("span");
+                // let eyeImg = document.createElement("span");
+                // let eyeP = document.createElement("p");
+                eyeWrap.innerHTML = `<div class="${eyeDirection}"></div><p></p>`
+                rowFrag.appendChild(eyeWrap);
             })
             rowDiv.appendChild(rowFrag);
             cloudFrag.appendChild(rowDiv);
@@ -238,16 +235,17 @@ const saveOrder = () => {
 }
 
 function addLayer() {
-    let newLayer = svgCloudsLeft.cloneNode(true)  
-    newLayer.id = 'svg-cloud-layer-r';  
-    svgCloudsRight.replaceWith(newLayer);
-
-    document.addEventListener("keydown", function(e) {
-        if (Object.keys(moveKeys).includes(e.key)) {
-            e.preventDefault();
-            moveDiv(moveKeys[e.key])}
-    });
-    
+    let newLayer = svgCloudsLeft.cloneNode(true)      
+    newLayer.id = "svg-cloud-layer-r" 
+    svgCloudsRight.replaceWith(newLayer);    
+}
+function addMirroredLayer() {
+    let left = svgCloudsLeft.cloneNode(true);
+    let right = svgCloudsRight.cloneNode(true);
+    left.id = "svg-cloud-layer-l-m"; 
+    right.id = "svg-cloud-layer-r-m";    
+    svgCloudsLeft.parentElement.appendChild(left);
+    svgCloudsLeft.parentElement.appendChild(right);
 }
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 
