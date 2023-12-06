@@ -177,6 +177,17 @@ function changeHandler(propName, newVal) {
         altars.classList.toggle('show')
     }
 }
+
+function toggleCloudNames() {
+    document.querySelectorAll('.svg-cloud').forEach(el => {
+        el.classList.toggle('hide-before');        
+    });
+}
+function toggleTrigrams() {
+    document.querySelectorAll('.svg-cloud').forEach(el => {
+        el.classList.toggle('hide-trigrams');        
+    });
+}
 // parse data in custom order by cloud name as key 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -187,7 +198,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         cloudWrapper.setAttribute('class', 'container');
         let cloudFrag = document.createDocumentFragment();
         let cloudDiv = document.createElement("div");
-        let classes = `${cloudName} svg-cloud`;
+        let classes = `${cloudName} svg-cloud hide-before hide-trigrams`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
@@ -264,8 +275,6 @@ function addMirroredLayer() {
     svgCloudsLeft.parentElement.appendChild(left);
     svgCloudsLeft.parentElement.appendChild(right);
 }
-buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
-readEyeData(eyeData);
 
 
 const moveKeys = {
@@ -275,34 +284,27 @@ const moveKeys = {
     "ArrowRight": [0,1]
     }
 
-function convertDirsToInts (str) { 
-    return str.replaceAll('o',0).replaceAll('u',1).replaceAll('r',2).replaceAll('d',3).replaceAll('l',4); 
-
-}
 
 function readEyeData(eyeData) {
     let ret = {};
     let clouds = Object.keys(eyeData);
-    clouds.map((cloudname, cloudNumber) => {
+    clouds.map(cloudname => {
         let cloudDatArr = [];
         eyeData[cloudname].map((rowString, i, arr) => {
             if (i%2) {
-                // debugger;
-                // get 2 rows at a time to read full trigrams
                 let topRow = convertDirsToInts(arr[i - 1]).split('');
                 let botRow = convertDirsToInts(rowString).split('');
                 let flat = topRow.flatMap((val, j) => [val, botRow[j]]);
                 cloudDatArr = cloudDatArr.concat(flat);
-                
-                // console.log("DATA:", i, topRow, botRow, cloudDatArr, ret)
             }})
-            ret[cloudname] = cloudDatArr.join('');
-        }
-    )
+        ret[cloudname] = cloudDatArr.join(',');
+    })
     console.table(ret)
-    // console.log(ret)
     return ret;
 }
-    
 
+const convertDirsToInts = (str) => str.replaceAll('o',0).replaceAll('u',1).replaceAll('r',2).replaceAll('d',3).replaceAll('l',4);
 
+buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
+readEyeData(eyeData);
+toggleCloudNames();
