@@ -7,15 +7,9 @@
 </head>
 <body>
     <div id="svg-layer-controls">
-        <!-- <div id="move-controls">
-            <button type="button" id="btn-move-layer1">1</button>
-            <button type="button" id="btn-move-layer2">2</button>
-            <button type="button" id="btn-move-layer3">3</button>
-            <button type="button" id="btn-move-diamond">Diamond</button>
-        </div> -->
-        <button type="button" id="btn-show-trigrams" onclick="toggleTrigrams()">Show Trigrams</button>
-        <button type="button" id="btn-show-cloudnames"  onclick="toggleCloudNames()">Show Cloud Names</button>
-            <button type="button" id="save-order" >Save order</button>
+        <button type="button" id="btn-show-trigrams" onclick="changeHandler('trigrams')">Show Trigrams</button>
+        <button type="button" id="btn-show-cloudnames"  onclick="changeHandler('cloudnames')">Show Cloud Names</button>
+        <button type="button" id="save-order" >Save order</button>
         <button type="button" id="add-layer">Mirror the current layer horizontally and vertically</button>
         <button type="button" id="add-mirrored-layer">Add another double layer mirroring 1 & 2</button>
     </div>
@@ -23,43 +17,7 @@
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
         <div id="svg-cloud-layer-r" class="wrapper"></div>
         <div class="page" >
-        <div class="controls">
-            <form id="eyes">
-                <div id="log"><strong>Noita Moire Pattern Generator</strong><br> Alt + Left Click to rotate a cloud, click and drag to move. Copies on the left are horizontally mirrored copies of the right.</div>    
-                <ul>
-                <li>
-                    <input id="checkbox-overlap" type="checkbox" name="overlap" />
-                    <label for="checkbox-overlap">Overlay right side</label>
-                </li>
-                <li>
-                    <input id="range-overlap" type="range" min="-1000" max="1000" step="1" value="0" />
-                    <label for="range-overlap">Overlay offset (px)</label>
-                </li>
-                <!-- <li> <input id="checkbox-rightangle" type="checkbox" name="rightangle" /> <label for="checkbox-rightangle">Right pieces rotated 90 degrees</label> </li> <li> <input id="checkbox-mirror-h" type="checkbox"  name="mirrorh" /> <label for="checkbox-mirror-h">Right pieces mirrored horizontally</label> </li> <li> <input id="checkbox-mirror-v" type="checkbox"  name="mirrorv" /> <label for="checkbox-mirror-v">Right pieces mirrored vertically</label> </li> -->
-                    <li>   
-                        <input id="checkbox-borders" type="checkbox" name="labels" />
-                        <label for="checkbox-labels">Hide cloud names</label> 
-                    </li>
-                    <li>   
-                            <input id="checkbox-borders" type="checkbox" name="borders" />
-                            <label for="checkbox-borders">Hide borders</label> 
-                        </li>
-                    <li>    
-                        <input id="checkbox-diamond" type="checkbox" name="diamond" />
-                        <label for="checkbox-diamond">Hide diamond</label>
-                    </li>
-                    <li>    
-                        <input id="checkbox-altars" type="checkbox" name="altars" />
-                        <label for="checkbox-altars">Hide altars</label>
-                    </li>
-                    <li>    
-                        <input id="checkbox-trigrams" type="checkbox" name="trigram" />
-                        <label for="checkbox-trigrams">Show trigram paths</label>
-                    </li>
-                </ul>
-                
-            </form>
-            
+        <div class="controls">           
         </div>
         <div id="diamond" class="show"></div>
         <div id="altars"></div>

@@ -1,113 +1,17 @@
 // data from wiki, translated to text and removing the line end placeholders.
 // ie, left-to-right, single file reading of the eyes, not trigrammed
 const eyeData = {
-    "e1": [
-        "rououdrrddololuudordruuldudoddoolorlooo",
-        "odrolurroooulrrrlrurrrrouuooodroudluuud",
-        "duorruolloooroouololoullulroddorrodlrlu",
-        "rdudududooduudruroulrrduddulludlulluruu",
-        "ouloodruruuludooluuuouoorlurluooloduoou",
-        "olodduldrdluurruououoolourolurllrllrlor",
-        "udddurroddouoduuduuuruuruodrrdul",
-        "uduolrlrrludodoluuorodurdroldud"
-    ], "w1": [
-    // "e1": [
-    //     "rououdrrddololuudordruuldudoddoolorlooo",
-    //     "odrolurroooulrrrlrurrrrouuooodroudluuud",
-    //     "duorruolloooroouololoullulroddorrodlrlu",
-    //     "rdudududooduudruroulrrduddulludlulluruu",
-    //     "ouloodruruuludooluuuouoorlurluooloduoou",
-    //     "olodduldrdluurruououoolourolurllrllrlor",
-    //     "udddurroddouoduuduuuruuruodrrdul",
-    //     "uduolrlrrludodoluuorodurdroldud"
-    // ], "w1": [
-        "duuoudrrddololuudordruuldudoddoolorlool",
-        "odrolurroooulrrrlrurrrrouuooodroudluuou",
-        "ororouollooouololloloullulroddorrodludu",
-        "uuurududooouuororoulrrduddulludlullulou",
-        "rurrrddodrllooorldrduuuorrurduoduorrold",
-        "lodldulourrruuudloruodouluddlurruddoudr",
-        "orlulrrulrrrodorlroourdrurlordrdroulod",
-        "duoudrruurudorodrrrroolrrduodudrrluud"
-    ], "e2": [
-        "uruoudrrddololuudordruuldudoddoolorlool",
-        "udrolurroooulrrrlrurrrrouuooodroudluudr",
-        "doroudrdoollruouldoourululoduuorluolrrd",
-        "uorlluuudrrrrdulodddoudorduouodrrllulrr",
-        "ouluudodoulluororoduuuulrluodlrdrudruur",
-        "uluurouroolouodorrurrloroloooouodrruolo",
-        "oouudrruoolrrduoldrlrouduodouoroodoorru",
-        "oroulrrloduroduddorduooouodduolluroulrr",
-        "odlrouolduouuooroourl",
-        "udulororrorouludrrduu"
-    ], "w2": [
-        "dououldolrduuuuudouodroouulruuulrolrull",
-        "udroluoorlluroorrruluoudrloorrrrourolor",
-        "uuouroruoollourorrouluoororudooudrlddur",
-        "louudouurouodrrdudldulrrdudrudoduuooood",
-        "ulduuorrdorlrrlrouorurrdulrroouoduuurrd",
-        "rodlourdoolurrrrududrrrordorlruloruullo",
-        "urrrouoooourulduourdddurouorrlrodrru",
-        "ouuouououdrurduuododrodorludrodrrodo"
-    ], "e3": [
-        "rruouldolooouoodorrrordurrrrdrullullruu",
-        "ddroluoorrrrldudluoodrlroooouorroolrldu",
-        "dudrrddururoudlooluludorduooourduoldudo",
-        "orooroulooororururduuuooooduurrrouuoodr",
-        "ulorulrrrordolroourulrluruurrduolouoodl",
-        "oodoruodudoorurruoduoooodurddroodrlolrr",
-        "oourlorluorordroldoldodurrlududurdouulr",
-        "rdrduuudoruuoruororrrdluluruudrlodrurdo",
-        "oouodourlrrurrloddoodruuorlrududdrduoou",
-        "luoruouoddooldroduluruuulrrddolodlooolu",
-        "olurlourdol",
-        "olrdououol"
-    ], "w3": [
-        "uuuouldolollorduouoddrdrurouudrloodrord",
-        "ldroluoordlrurodoullururrrrloulroruuudo",
-        "oddoduudlrrlulluuudodoodulrrdlolruduuur",
-        "lduludrooruouluroruurldurdoroduuuldooru",
-        "uoduddrulroordoouuuldodluldodduuourruro",
-        "uouudrruuurollrduoududrurduoroduuorrroo",
-        "urourourdudoouuorlouluddoruordoorrrooll",
-        "ruodurrroooullourroodrdrulruluddrudurro",
-        "urorrlorrrdlrododdurorlloloroo",
-        "ooruruuoouluuorrlruodlorluullr"
-    ], "e4": [
-        "uououldolooouoooooouorudrdduroulruddood",
-        "rdroluoorrrrldururldoldodoouuorodlruudo",
-        "uouoolrrdruoodldooullrulrrlorrroodooorr",
-        "dodluuorrdudrorloddorodorrrlluulrououlu",
-        "uldrdldoourorlrrdouuodoudoroouoloodoudo",
-        "ourddrloudludludorlludoulurlurrrrdoddrr",
-        "rurrrruldudodorouduoruuduorrdoooduodrdr",
-        "ldrdduluuodrlodroourruoduurldullourordu",
-        "urrorlrdououduurdrrudod",
-        "dlruruorrouoodrdodlodl"
-    ], "w4": [
-        "dououldolooouoooooouorudrddurouloolooor",
-        "rdroluoorrrrldururldoldodoouuorrruudulr",
-        "ruuduoruloouodrurrrluurldoouooudurrddud",
-        "odorrurdoudrdouldoludlrodooodrddrlruulo",
-        "oloruorlouodrorruorldoruouruodouroddrdr",
-        "lorruuuodudrluruorulrlloduuurrorulduulu",
-        "rolrddrluroddororddouolurolrluourrdruou",
-        "duuuloduulrurdrurrluorloudrlloodorrullo",
-        "rrlduluulolruruuululoudo",
-        "ororduooooduooouoruloouu"
-    ], "e5": [
-        "uuuouldolooouoooooouorudrddurouldolludd",
-        "ddroluoorrrrldururldoldodoouuoruuuurldo",
-        "uourulrrddororloulullrurrrrrdorurrudrdd",
-        "dodluuorrlouroroludoroorrlrlrorlodluror",
-        "ouluuouuluoduuuouorlouuorolouoouduooudo",
-        "ruuruuudouuolluruuuurlodluourroloolurud",
-        "uoroluolurruudludouddoudrldouuolrouorru",
-        "ororodoorrloouourollrduuolruuuulroduuor",
-        "udurrlrrorrrolu",
-        "rdrllruoudduldu"
-    ]
+"e1": ["rououdrrddololuudordruuldudoddoolorlooo", "odrolurroooulrrrlrurrrrouuooodroudluuud", "duorruolloooroouololoullulroddorrodlrlu", "rdudududooduudruroulrrduddulludlulluruu", "ouloodruruuludooluuuouoorlurluooloduoou", "olodduldrdluurruououoolourolurllrllrlor", "udddurroddouoduuduuuruuruodrrdul", "uduolrlrrludodoluuorodurdroldud"],
+"w1": ["duuoudrrddololuudordruuldudoddoolorlool", "odrolurroooulrrrlrurrrrouuooodroudluuou", "ororouollooouololloloullulroddorrodludu", "uuurududooouuororoulrrduddulludlullulou", "rurrrddodrllooorldrduuuorrurduoduorrold", "lodldulourrruuudloruodouluddlurruddoudr", "orlulrrulrrrodorlroourdrurlordrdroulod", "duoudrruurudorodrrrroolrrduodudrrluud"],
+"e2": ["uruoudrrddololuudordruuldudoddoolorlool", "udrolurroooulrrrlrurrrrouuooodroudluudr", "doroudrdoollruouldoourululoduuorluolrrd", "uorlluuudrrrrdulodddoudorduouodrrllulrr", "ouluudodoulluororoduuuulrluodlrdrudruur", "uluurouroolouodorrurrloroloooouodrruolo", "oouudrruoolrrduoldrlrouduodouoroodoorru", "oroulrrloduroduddorduooouodduolluroulrr", "odlrouolduouuooroourl", "udulororrorouludrrduu"],
+"w2": ["dououldolrduuuuudouodroouulruuulrolrull", "udroluoorlluroorrruluoudrloorrrrourolor", "uuouroruoollourorrouluoororudooudrlddur", "louudouurouodrrdudldulrrdudrudoduuooood", "ulduuorrdorlrrlrouorurrdulrroouoduuurrd", "rodlourdoolurrrrududrrrordorlruloruullo", "urrrouoooourulduourdddurouorrlrodrru", "ouuouououdrurduuododrodorludrodrrodo"],
+"e3": ["rruouldolooouoodorrrordurrrrdrullullruu", "ddroluoorrrrldudluoodrlroooouorroolrldu", "dudrrddururoudlooluludorduooourduoldudo", "orooroulooororururduuuooooduurrrouuoodr", "ulorulrrrordolroourulrluruurrduolouoodl", "oodoruodudoorurruoduoooodurddroodrlolrr", "oourlorluorordroldoldodurrlududurdouulr", "rdrduuudoruuoruororrrdluluruudrlodrurdo", "oouodourlrrurrloddoodruuorlrududdrduoou", "luoruouoddooldroduluruuulrrddolodlooolu", "olurlourdol", "olrdououol"],
+"w3": ["uuuouldolollorduouoddrdrurouudrloodrord", "ldroluoordlrurodoullururrrrloulroruuudo", "oddoduudlrrlulluuudodoodulrrdlolruduuur", "lduludrooruouluroruurldurdoroduuuldooru", "uoduddrulroordoouuuldodluldodduuourruro", "uouudrruuurollrduoududrurduoroduuorrroo", "urourourdudoouuorlouluddoruordoorrrooll", "ruodurrroooullourroodrdrulruluddrudurro", "urorrlorrrdlrododdurorlloloroo", "ooruruuoouluuorrlruodlorluullr"],
+"e4": ["uououldolooouoooooouorudrdduroulruddood", "rdroluoorrrrldururldoldodoouuorodlruudo", "uouoolrrdruoodldooullrulrrlorrroodooorr", "dodluuorrdudrorloddorodorrrlluulrououlu", "uldrdldoourorlrrdouuodoudoroouoloodoudo", "ourddrloudludludorlludoulurlurrrrdoddrr", "rurrrruldudodorouduoruuduorrdoooduodrdr", "ldrdduluuodrlodroourruoduurldullourordu", "urrorlrdououduurdrrudod", "dlruruorrouoodrdodlodl"],
+"w4": ["dououldolooouoooooouorudrddurouloolooor", "rdroluoorrrrldururldoldodoouuorrruudulr", "ruuduoruloouodrurrrluurldoouooudurrddud", "odorrurdoudrdouldoludlrodooodrddrlruulo", "oloruorlouodrorruorldoruouruodouroddrdr", "lorruuuodudrluruorulrlloduuurrorulduulu", "rolrddrluroddororddouolurolrluourrdruou", "duuuloduulrurdrurrluorloudrlloodorrullo", "rrlduluulolruruuululoudo", "ororduooooduooouoruloouu"],
+"e5": ["uuuouldolooouoooooouorudrddurouldolludd", "ddroluoorrrrldururldoldodoouuoruuuurldo", "uourulrrddororloulullrurrrrrdorurrudrdd", "dodluuorrlouroroludoroorrlrlrorlodluror", "ouluuouuluoduuuouorlouuorolouoouduooudo", "ruuruuudouuolluruuuurlodluourroloolurud", "uoroluolurruudludouddoudrldouuolrouorru", "ororodoorrloouourollrduuolruuuulroduuor", "udurrlrrorrrolu", "rdrllruoudduldu"]
 };
+
 const messages =  document.getElementById("messages");
 const svgCloudsLeft = document.getElementById("svg-cloud-layer-l");
 const svgCloudsRight = document.getElementById("svg-cloud-layer-r");
@@ -149,45 +53,20 @@ function moveDiv(vh) {
 btnSaveOrder.addEventListener("click", () => saveOrder(getCurrentOrder()) )
 btnAddLayer.addEventListener("click", () => addLayer() )
 btnAddMirroredLayer.addEventListener("click", () => addMirroredLayer() )
-form.addEventListener("change", (e) => {
-    e.preventDefault();
-    let changedProp = e.target.name || e.target.id;
-    let newVal = (e.target.type == "checkbox") ? e.target.checked : e.target.value;
-    changeHandler(changedProp, newVal);
-});
+
 function changeHandler(propName, newVal) {
-    if (propName === 'overlap') {
-        rightEyes.classList.toggle('overlap')
+    if (propName === 'diamond') diamond.classList.toggle('show')
+    if (propName === 'altars') altars.classList.toggle('show')
+    if (propName === 'trigrams') {
+        document.querySelectorAll('.svg-cloud').forEach(el => el.classList.toggle('hide-trigrams'))
     }
-    if (propName === 'range-overlap') {
-        let offset = newVal + 'px';
-        rightEyes.style.left = offset;
-        rightEyes.style.top = offset;
-    }
-    if (propName === 'borders') {
-        eyeclouds.classList.toggle('borders')
-    }
-    if (propName === 'labels') {
-        eyeclouds.classList.toggle('labels')
-    }
-    if (propName === 'diamond') {
-        diamond.classList.toggle('show')
-    }
-    if (propName === 'altars') {
-        altars.classList.toggle('show')
+    if (propName === 'cloudnames') {
+        document.querySelectorAll('.svg-cloud').forEach(el => el.classList.toggle('hide-before'))
     }
 }
 
-function toggleCloudNames() {
-    document.querySelectorAll('.svg-cloud').forEach(el => {
-        el.classList.toggle('hide-before');        
-    });
-}
-function toggleTrigrams() {
-    document.querySelectorAll('.svg-cloud').forEach(el => {
-        el.classList.toggle('hide-trigrams');        
-    });
-}
+
+
 // parse data in custom order by cloud name as key 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -290,6 +169,7 @@ function readEyeData(eyeData) {
     let clouds = Object.keys(eyeData);
     clouds.map(cloudname => {
         let cloudDatArr = [];
+        ret[cloudname] = {};
         eyeData[cloudname].map((rowString, i, arr) => {
             if (i%2) {
                 let topRow = convertDirsToInts(arr[i - 1]).split('');
@@ -297,14 +177,20 @@ function readEyeData(eyeData) {
                 let flat = topRow.flatMap((val, j) => [val, botRow[j]]);
                 cloudDatArr = cloudDatArr.concat(flat);
             }})
-        ret[cloudname] = cloudDatArr.join(',');
+            ret[cloudname]['base5'] = cloudDatArr.join(',');
+            ret[cloudname]['binary'] = cloudDatArr.map(eyeVal => Number(eyeVal).toString(2).padStart(3,'0'));
     })
     console.table(ret)
     return ret;
 }
 
 const convertDirsToInts = (str) => str.replaceAll('o',0).replaceAll('u',1).replaceAll('r',2).replaceAll('d',3).replaceAll('l',4);
-
+const makeBinary = dataArr => {
+    return dataArr.map((eyeVal) => {
+        // debugger;
+    Number(eyeVal).toString(2).padStart(3,'0');
+        
+    })
+}
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 readEyeData(eyeData);
-toggleCloudNames();
