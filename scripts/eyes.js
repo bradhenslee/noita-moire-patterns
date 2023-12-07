@@ -65,8 +65,6 @@ function changeHandler(propName, newVal) {
     }
 }
 
-
-
 // parse data in custom order by cloud name as key 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -105,14 +103,10 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         cloudCount++;
     });
     layerDiv.appendChild(eyeArrangementFrag);
-    // Mouse handler
-    // eyes.addEventListener("contextmenu", ( e )=> { e.preventDefault(); return false; } ); 
+    // TODO: move delgation up, combine listeners
     layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
-        el.addEventListener("mouseup", (e) => { 
-            // if (e.altKey) rotateCloud(e.currentTarget, e); 
-            rotateCloud(e.currentTarget, e); 
-        });
-    });   
+        el.addEventListener("mouseup", (e) => rotateCloud(e.currentTarget, e));
+    });
 
     messages.textContent = `Loaded saved order:\n ${getCurrentOrder()}`;
 }
@@ -155,14 +149,7 @@ function addMirroredLayer() {
     svgCloudsLeft.parentElement.appendChild(right);
 }
 
-
-const moveKeys = {
-    "ArrowUp": [-1,0],
-    "ArrowDown": [1,0],
-    "ArrowLeft": [0,-1],
-    "ArrowRight": [0,1]
-    }
-
+const moveKeys = { "ArrowUp": [-1,0], "ArrowDown": [1,0], "ArrowLeft": [0,-1], "ArrowRight": [0,1] }
 
 function readEyeData(eyeData) {
     let ret = {};
@@ -174,23 +161,17 @@ function readEyeData(eyeData) {
             if (i%2) {
                 let topRow = convertDirsToInts(arr[i - 1]).split('');
                 let botRow = convertDirsToInts(rowString).split('');
-                let flat = topRow.flatMap((val, j) => [val, botRow[j]]);
-                cloudDatArr = cloudDatArr.concat(flat);
+                let trigramRow = topRow.flatMap((val, j) => [val, botRow[j]]);
+                cloudDatArr = cloudDatArr.concat(trigramRow);
             }})
-            ret[cloudname]['base5'] = cloudDatArr.join(',');
             ret[cloudname]['binary'] = cloudDatArr.map(eyeVal => Number(eyeVal).toString(2).padStart(3,'0'));
+            ret[cloudname]['base5'] = cloudDatArr.join(',');
     })
     console.table(ret)
     return ret;
 }
 
 const convertDirsToInts = (str) => str.replaceAll('o',0).replaceAll('u',1).replaceAll('r',2).replaceAll('d',3).replaceAll('l',4);
-const makeBinary = dataArr => {
-    return dataArr.map((eyeVal) => {
-        // debugger;
-    Number(eyeVal).toString(2).padStart(3,'0');
-        
-    })
-}
+
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 readEyeData(eyeData);
