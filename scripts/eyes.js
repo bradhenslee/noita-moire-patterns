@@ -161,10 +161,23 @@ function readEyeData(eyeData) {
             if (i%2) {
                 let topRow = convertDirsToInts(arr[i - 1]).split('');
                 let botRow = convertDirsToInts(rowString).split('');
-                let trigramRow = topRow.flatMap((val, j) => [val, botRow[j]]);
-                cloudDatArr = cloudDatArr.concat(trigramRow);
-            }})
-            ret[cloudname]['binary'] = cloudDatArr.map(eyeVal => Number(eyeVal).toString(2).padStart(3,'0'));
+                let trigramRow = topRow.flatMap((val, j) => {
+                    let topVal = val;
+                    let botVal = botRow[j];
+                    if (!!botVal) {
+                        return (!!topVal) ? [topVal, botVal] : [botVal];
+                    } else 
+                        return [topVal];
+                    });
+                    cloudDatArr = cloudDatArr.concat(trigramRow);
+                }})
+            ret[cloudname]['binary'] = cloudDatArr.map(eyeVal => {
+                let bin = Number(eyeVal).toString(2).padStart(3,'0');
+                if (!eyeVal) {
+                    throw error;
+                }
+                return bin; 
+            });
             ret[cloudname]['base5'] = cloudDatArr.join(',');
     })
     console.table(ret)
