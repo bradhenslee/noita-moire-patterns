@@ -1,40 +1,20 @@
-body {
-    font-family: sans-serif;
-}
-button {
-    border-radius: 1px;
-    border-style: none;
-    /* font-family: sans-serif; */
-    margin: 3px;
-}
 #svg-layer-controls, #messages {    
     color: white;
     background-color: royalblue;
-    display: inline-block; 
+    display: flex; 
     width: 100%;
     text-align: center;
 }
-.container {
-    width: 474px;
-    display: table-cell; 
- /* border: 1px red solid; */
-}
+.container { width: 474px; display: table-cell; }
 .wrapper { display: grid; }  
-
-.svg-cloud {
-    display: flex;
-    flex-direction: column;
-}
-.bordered .svg-cloud { box-shadow: blue inset 1px 1px 0 0, blue inset -1px -1px 0 0; }
-/* .svg-cloud:hover::after { */
-.svg-cloud::before {
+.svg-cloud { display: flex; flex-direction: column; }
+.svg-cloud::after {
     border-radius: 2px;
     content: attr(aria-label);
     text-orientation: upright;
     writing-mode: vertical-lr;
-    position: relative;
-    left: 101%;
-    top: 50%;
+    position: absolute;
+    left:100%;
     text-transform: uppercase;
     font-size: small;
     /* background: aliceblue; */
@@ -42,97 +22,41 @@ button {
     border: 2px blue solid;
     border-left: none;
 }
-.svg-cloud-row {
-    display: flex;
-}
-.svg-cloud-row span {
-}
-/* lol pride flags! */
-/* .svg-cloud-row span { background: linear-gradient( to right, red 20%, orange 20% 40%, yellow 40% 60%, green 60% 80%, blue 80% ); } */
-.svg-cloud-row span::after {
-    /* counter-reset: eyecounter 0;  */
-    /* counter-increment: eyecounter;
-    content: counters(eyecounter, ".") " ";
-    font-size: 6px;
-    background: azure;
-    z-index: 9;
-    border-radius: 1px;
-    left: -7px;
-    position: relative;     */
-}
+.svg-cloud-row { display: flex; }
+
 .svg-cloud-row:nth-child(2n) span:nth-child(3n - 1) { 
     /* overflow: visible; */
     /* background: linear-gradient( 90deg, red 20%, orange 20% 80%);  */
 }
 
 /* // 5, 6, 11, 12 */
-.svg-cloud-row:nth-child(2n) span:nth-child(3n) { 
-    /* overflow: visible; */
-    /* background: linear-gradient( 285deg, blue 20%, pink 20% 80%);  */
-}
-
-.svg-cloud-row span {
-    width: 11px;        /* critical: sets eye width dimensions */
-    padding-right: 1px; /* critical: makes 1px horizontal spacing between each eye in a row*/
-    display: inline-flex;
-}
-
-.svg-cloud-row:nth-child(2n) {
-    padding-left: 6px;  /* critical: offset the even rows 6px to match game display, changing from appearance from grid to trigrams */
-}
-/* .svg-cloud-row div p {
-    display: block;
-    height: 100%;
-} */
-
-/* content: '\25B3'; */
-
+.svg-cloud-row:nth-child(2n) span:nth-child(3n) { /* overflow: visible; */ }
+.svg-cloud-row span { width: 11px; padding-right: 1px; display: inline-flex; } /* critical: width & pad */
+.svg-cloud-row:nth-child(2n) { padding-left: 6px; } /* critical: offset the even rows */
 .svg-cloud-row span p { position: absolute; margin: 0;}
-.hide-trigrams .svg-cloud-row span p::after { visibility: hidden; }
-.svg-cloud-row span:nth-child(3n - 1):not(:last-child) p::after { 
-    content: '\2571\2572'; color: blue; border-bottom: 1px solid blue; left: 11px; 
-}
-.svg-cloud-row span:nth-child(3n + 1) p::after { 
-    content: '\2572\2571'; color: red; border-top: 1px solid red;
-}
-.svg-cloud-row:nth-of-type(2n) span:nth-child(3n+1) p::after { 
-    content: none;
-}
-.svg-cloud-row:nth-of-type(2n) span:nth-child(3n-1) p::after { 
-    content: none; color: green; position: absolute; }
-.svg-cloud-row span p::after { position: absolute; font-size: 11px; font-family: monospace; 
-    transform: scale(2.5,1);
-    left: 5px;
-}
-/* .svg-cloud-row { background-image: ;} */
-.svg-cloud-row div.o { background-color: teal; content: url("../images/eyeforward-t.svg") }
-.svg-cloud-row div.u { background-color: orchid; content: url("../images/eyeup-t.svg") }
-.svg-cloud-row div.d { background-color: lemonchiffon; content: url("../images/eyedown-t.svg") }
-.svg-cloud-row div.r { background-color:navy; content: url("../images/eyeright-t.svg") }
-.svg-cloud-row div.l { background-color: powderblue; content: url("../images/eyeleft-t.svg") }
-/* TODO: add color controls */
-.svg-cloud-row div { image-rendering: pixelated; background-color: rgba(0, 0, 0, 0) !important; }
+.svg-cloud-row span:nth-child(3n - 1):not(:last-child) p::after { content: '\2571\2572'; color: blue; border-bottom: 1px solid blue; left: 11px; }
+/* .svg-cloud-row span:nth-child(3n - 1):not(:last-child) p::after {
+    content: attr(aria-label);
+    color:orange;
+} */
+.svg-cloud-row span:nth-child(3n + 1) p::after { content: '\2572\2571'; color: red; border-top: 1px solid red; }
+.svg-cloud-row:nth-of-type(2n) span:nth-child(3n+1) p::after { content: none; }
+.svg-cloud-row:nth-of-type(2n) span:nth-child(3n-1) p::after { content: none; color: green; position: absolute; }
+.svg-cloud-row span p::after { position: absolute; font-size: 11px; font-family: monospace; transform: scale(2.5,1); left: 5px; }
+.svg-cloud-row div.o { background-color: white; content: url("../images/eyeforward-t.svg") }         /* 0 */
+.svg-cloud-row div.u { background-color: yellow; content: url("../images/eyeup-t.svg") }            /* 1 */
+.svg-cloud-row div.d { background-color: yellowgreen; content: url("../images/eyedown-t.svg") }    /* 2 */
+.svg-cloud-row div.r { background-color: green; content: url("../images/eyeright-t.svg") }            /* 3 */
+.svg-cloud-row div.l { background-color: darkgreen; content: url("../images/eyeleft-t.svg") }      /* 4 */
 
- 
+/* // manual height values */
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
-#svg-cloud-layer-l, #svg-cloud-layer-l-m {
-    position: absolute;
-    top: 111px;
-    left: 19px;
 
-}
-#svg-cloud-layer-r, #svg-cloud-layer-r-m {
-    position: absolute;
-    top: 118px;
-    left: 18px;
-    transform: matrix(-1, 0, 0, -1, 0, 0);
-}
-#svg-cloud-layer-l-m, #svg-cloud-layer-r-m {
-    rotate: 0.25turn;
-}
+
+#svg-cloud-layer-l, #svg-cloud-layer-l-m { position: absolute; top: 61px; left: 19px; }
+#svg-cloud-layer-r, #svg-cloud-layer-r-m { position: absolute; top: 68px; left: 18px; transform: matrix(-1, 0, 0, -1, 0, 0); }
+#svg-cloud-layer-l-m, #svg-cloud-layer-r-m { rotate: 0.25turn; position: absolute; top: 0;}
 #move-controls {display: flex; flex-direction: column;}
-
-ul { margin: 0; padding: 0;}
 
 #diamond {
     visibility: hidden;
@@ -153,34 +77,28 @@ ul { margin: 0; padding: 0;}
     image-rendering: pixelated;
     background-size: auto;
     position: absolute;
-    height: 1000px; 
-    width: 100%;
-    top: 100px;
-    z-index: -2;
-    
 }
 
+.hide-trigrams .svg-cloud-row span p::after { visibility: hidden; }
+.hide-trigram-order .svg-cloud-row span p::before { visibility: hidden; }
+.hide-colors .svg-cloud-row div { image-rendering: pixelated; background-color: rgba(0, 0, 0, 0) !important; } 
 .show { visibility: visible !important; }
-.hide-before::before { visibility: hidden; }
+.hide-cloudnames::after { visibility: hidden; }
 .hide { visibility: hidden; }
-.controls { visibility: hidden; background-color: midnightblue; 
-    color: white; margin: 20px; padding: 10px; border: 2px green dotted; z-index: 111;
-    position: fixed;
+.controls { background-color: midnightblue; 
+    color: white;
     display: flex;
-    width: 300px;
-    right: 10px;
-    bottom: 10px;
-    font-size: xx-small;
-    font-family: 'Courier New', Courier, monospace;
+    font-size: 5px;
+    font-family: monospace;
+}
+.ui-text { padding:5px; flex: none; }
+button {
+    border-radius: 1px;
+    border-style: none;
+    font-size: 5px;
+    font-family: monospace;
+    margin: 1px;
 }
 
-ul.controls li {
-    display: flex;
-    list-style: none;
-    border: yellowgreen 2px dashed;
-    align-items: center;
-    padding: 5px;
-    margin: 5px;
-}
-
-
+.pulsate { -webkit-animation: pulsate 0.5s ease-in-out; -webkit-animation-iteration-count: 2; opacity: 1; }
+@-webkit-keyframes pulsate { 0% { opacity: 0.5; } 50% { opacity: 1.0; } 100% { opacity: 0.5; } }

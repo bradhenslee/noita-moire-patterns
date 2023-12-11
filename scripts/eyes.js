@@ -28,13 +28,10 @@ const drake = dragula([svgCloudsLeft]).on('drag', function (el) {
     messages.textContent = `New order:\n ${o}`;
 });
 
-const form = document.querySelector("form");
-const btnSaveOrder = document.getElementById("save-order");
-const btnAddLayer = document.getElementById("add-layer");
-const btnAddMirroredLayer = document.getElementById("add-mirrored-layer");
 const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 w3 e4 w4 e5";
 const displayOrder = userOrders.trim().split(' ');
 
+// event handling - moveable elements
 document.addEventListener("keydown", function(e) {
     if (Object.keys(moveKeys).includes(e.key)) {
         e.preventDefault();
@@ -50,22 +47,23 @@ function moveDiv(vh) {
     if (vh[1] == 1) el.style.left = left + 1 + 'px'
 }
 
-btnSaveOrder.addEventListener("click", () => saveOrder(getCurrentOrder()) )
-btnAddLayer.addEventListener("click", () => addLayer() )
-btnAddMirroredLayer.addEventListener("click", () => addMirroredLayer() )
+// event handling - other controls
+const toggleClass = (parentClass, toggleClass) => document.querySelectorAll(parentClass)
+    .forEach(el => el.classList.toggle(toggleClass));
 
 function changeHandler(propName, newVal) {
+    if (propName === 'saveorder') saveOrder(getCurrentOrder())
+    if (propName === 'addlayer') addLayer() 
+    if (propName === 'addmirroredlayer') addMirroredLayer() 
     if (propName === 'diamond') diamond.classList.toggle('show')
     if (propName === 'altars') altars.classList.toggle('show')
-    if (propName === 'trigrams') {
-        document.querySelectorAll('.svg-cloud').forEach(el => el.classList.toggle('hide-trigrams'))
-    }
-    if (propName === 'cloudnames') {
-        document.querySelectorAll('.svg-cloud').forEach(el => el.classList.toggle('hide-before'))
-    }
+    if (propName === 'trigramorder') toggleClass('.svg-cloud', 'hide-trigram-order')
+    if (propName === 'trigrams') toggleClass('.svg-cloud', 'hide-trigrams')  
+    if (propName === 'cloudnames') toggleClass('.svg-cloud', 'hide-cloudnames')    
+    if (propName === 'eyecolors') toggleClass('.svg-cloud', 'hide-colors')    
 }
 
-// parse data in custom order by cloud name as key 
+// proceedural - parse eyeData, populating layerDiv with nine "eyeclouds" ordered by displayOrder 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
     let cloudCount = 0;
@@ -75,7 +73,8 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         cloudWrapper.setAttribute('class', 'container');
         let cloudFrag = document.createDocumentFragment();
         let cloudDiv = document.createElement("div");
-        let classes = `${cloudName} svg-cloud hide-before hide-trigrams`;
+        // most initial states set here! 
+        let classes = `${cloudName} svg-cloud hide-trigram-order hide-colors hide-cloudnames hide-trigrams`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
@@ -89,6 +88,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
             rowData.split('').map((eyeDirection) => {
                 let eyeWrap = document.createElement("span");
                 eyeWrap.setAttribute('id', `cloud-${rowCount}_row-${rowCount}_eye-${eyeCount}`);
+                eyeWrap.setAttribute('aria-label', convertDirsToInts(eyeDirection));
                 eyeWrap.innerHTML = `<div class="${eyeDirection}"></div><p></p>`
                 rowFrag.appendChild(eyeWrap);
                 eyeCount++;
@@ -108,8 +108,11 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         el.addEventListener("mouseup", (e) => rotateCloud(e.currentTarget, e));
     });
 
-    messages.textContent = `Loaded saved order:\n ${getCurrentOrder()}`;
+    messages.innerHTML = `Loaded saved order<br>${getCurrentOrder()}`;
 }
+
+
+
 // Rotate a cloud 1/4 turn
 function rotateCloud(el) {
     let currentAngle = el.style['-webkit-transform']
@@ -118,6 +121,7 @@ function rotateCloud(el) {
     : (currentAngle === 'rotate(0.5turn)') ? 'rotate(0.75turn)'
     : (currentAngle === 'rotate(0.75turn)') ? '' : console.error('rotation not matched');
 }
+
 const getCurrentOrder = (eyeLayer) => {
     let order = ''
     let layer = eyeLayer || svgCloudsLeft;
@@ -126,8 +130,6 @@ const getCurrentOrder = (eyeLayer) => {
     })
     return order;
 }
-
-
 
 const saveOrder = () => {
     let order = getCurrentOrder();

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html encoding="utf-8">
 <head>
-
     <link rel="stylesheet" href="./styles/eyes.css">
     <link rel="stylesheet" href="./styles/dragula.css">
 </head>
 <body>
-    <div id="svg-layer-controls">
-        <button type="button" id="btn-show-trigrams" onclick="changeHandler('trigrams')">Show Trigrams</button>
-        <button type="button" id="btn-show-cloudnames"  onclick="changeHandler('cloudnames')">Show Cloud Names</button>
-        <button type="button" id="save-order" >Save order</button>
-        <button type="button" id="add-layer">Mirror the current layer horizontally and vertically</button>
-        <button type="button" id="add-mirrored-layer">Add another double layer mirroring 1 & 2</button>
-    </div>
-        <div id="messages"></div>
+    <div class="page">
+        <div id="svg-layer-controls" class="controls">
+            <div class="ui-text"><div id="messages" class="pulsate"></div></div>
+            <div class="buttons">
+                <button type="button" onclick="changeHandler('trigrams')">Show Trigrams</button>
+                <button type="button" onclick="changeHandler('trigramorder')">Show Trigram Order</button>
+                <button type="button" onclick="changeHandler('cloudnames')">Show Cloud Names</button>
+                <button type="button" onclick="changeHandler('eyecolors')">Color eyes by value</button>
+                <button type="button" onclick="changeHandler('saveorder')">Save order to local storage</button>
+                <button type="button" onclick="changeHandler('addlayer')">Mirror the current layer horizontally and vertically</button>
+                <button type="button" onclick="changeHandler('addmirroredlayer')">Add another double layer mirroring 1 & 2</button>
+            </div>
+        </div>
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
         <div id="svg-cloud-layer-r" class="wrapper"></div>
-        <div class="page" >
-        <div class="controls">           
-        </div>
         <div id="diamond" class="show"></div>
-        <div id="altars"></div>
-   
+        <div id="altars"></div>   
     </div>
+</div>
     <script src='./scripts/dragula.min.js'></script>
     <script src='./scripts/eyes.js'></script>
 
