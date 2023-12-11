@@ -95,6 +95,9 @@ button {
 .svg-cloud-row span:nth-child(3n + 1) p::after { 
     content: '\2572\2571'; color: red; border-top: 1px solid red;
 }
+.svg-cloud-row:nth-of-type(2n) span:nth-child(3n+1) p::after { 
+    content: none;
+}
 .svg-cloud-row:nth-of-type(2n) span:nth-child(3n-1) p::after { 
     content: none; color: green; position: absolute; }
 .svg-cloud-row span p::after { position: absolute; font-size: 11px; font-family: monospace; 
