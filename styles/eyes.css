@@ -43,12 +43,13 @@
 .svg-cloud-row:nth-of-type(2n) span:nth-child(3n+1) p::after { content: none; }
 .svg-cloud-row:nth-of-type(2n) span:nth-child(3n-1) p::after { content: none; color: green; position: absolute; }
 .svg-cloud-row span p::after { position: absolute; font-size: 11px; font-family: monospace; transform: scale(2.5,1); left: 5px; }
-.svg-cloud-row div.o { background-color: white; content: url("../images/eyeforward-t.svg") }         /* 0 */
-.svg-cloud-row div.u { background-color: yellow; content: url("../images/eyeup-t.svg") }            /* 1 */
-.svg-cloud-row div.d { background-color: yellowgreen; content: url("../images/eyedown-t.svg") }    /* 2 */
-.svg-cloud-row div.r { background-color: green; content: url("../images/eyeright-t.svg") }            /* 3 */
-.svg-cloud-row div.l { background-color: darkgreen; content: url("../images/eyeleft-t.svg") }      /* 4 */
-
+.svg-cloud-row div.o { background-color: rgb(160, 222, 225); content: url("../images/eyeforward-t.svg") }         /* 0 */
+.svg-cloud-row div.u { background-color: royalblue; content: url("../images/eyeup-t.svg") }             /* 1 */
+.svg-cloud-row div.r { background-color: orchid; content: url("../images/eyeright-t.svg") }            /* 2 */
+.svg-cloud-row div.d { background-color: yellowgreen; content: url("../images/eyedown-t.svg") }            /* 3 */
+.svg-cloud-row div.l { background-color: orange; content: url("../images/eyeleft-t.svg") }    /* 4 */
+.svg-cloud-row div { 
+    border-radius: 50%; } /* for color effect only */ 
 /* // manual height values */
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
 
@@ -99,6 +100,10 @@ button {
     font-family: monospace;
     margin: 1px;
 }
-
+.image-uploader-drop {
+    border: 3px dotted yellow;
+    height: 50px;
+}
+.image-uploader-drop input { opacity: 0; }
 .pulsate { -webkit-animation: pulsate 0.5s ease-in-out; -webkit-animation-iteration-count: 2; opacity: 1; }
 @-webkit-keyframes pulsate { 0% { opacity: 0.5; } 50% { opacity: 1.0; } 100% { opacity: 0.5; } }

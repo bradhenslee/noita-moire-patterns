@@ -7,21 +7,44 @@
 <body>
     <div class="page">
         <div id="svg-layer-controls" class="controls">
-            <div class="ui-text"><div id="messages" class="pulsate"></div></div>
+            <div class="ui-text">
+                <div>Use <kbd>Arrow Keys</kbd> to nudge selected layer</div>
+                <select id="change-layer-selection" onchange="changeSelectedLayer(value)">
+                    <option value="0">Diamond</option>
+                    <option value="1">Layer 1</option>
+                    <option value="2">Layer 2</option>
+                    <option value="3">Layers 3/4</option>
+                </select>
+                <div id="messages" class="pulsate"></div>
+            </div>
+            <div class="image-uploader">            
+                <label class="image-uploader-drop" for="image_uploads">Add more images here
+
+                    <input
+                    type="file"
+                    id="image_uploads"
+                    name="image_uploads"
+                    accept=".jpg, .jpeg, .png"
+                    multiple />
+                </label>
+            
+            </div>
             <div class="buttons">
-                <button type="button" onclick="changeHandler('trigrams')">Show Trigrams</button>
-                <button type="button" onclick="changeHandler('trigramorder')">Show Trigram Order</button>
-                <button type="button" onclick="changeHandler('cloudnames')">Show Cloud Names</button>
-                <button type="button" onclick="changeHandler('eyecolors')">Color eyes by value</button>
-                <button type="button" onclick="changeHandler('saveorder')">Save order to local storage</button>
-                <button type="button" onclick="changeHandler('addlayer')">Mirror the current layer horizontally and vertically</button>
-                <button type="button" onclick="changeHandler('addmirroredlayer')">Add another double layer mirroring 1 & 2</button>
+                <button onclick="changeHandler('trigrams')">Trigram Borders</button>
+                <button onclick="changeHandler('cloudnames')">Cloud Names</button>
+                <button onclick="changeHandler('eyecolors')">Eye Colors</button>
+                <button onclick="changeHandler('addlayer')">Layer 2 (Mirror)</button>
+                <button onclick="changeHandler('addmirroredlayer')">Layers 3+4 (1+3, rotated)</button>
+                <!-- <button onclick="changeHandler('trigramorder')">Reading Ordering</button> -->
+                <button onclick="changeHandler('saveorder')">Save Layer 1 order</button>
             </div>
         </div>
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
         <div id="svg-cloud-layer-r" class="wrapper"></div>
+        <div id="layer3layer4"></div>
         <div id="diamond" class="show"></div>
-        <div id="altars"></div>   
+        <div id="altars"></div>
+        <div id="custom-image-layer"></div>  
     </div>
 </div>
     <script src='./scripts/dragula.min.js'></script>
