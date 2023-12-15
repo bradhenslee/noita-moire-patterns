@@ -7,19 +7,83 @@
 <body>
     <div class="page">
         <div id="svg-layer-controls" class="controls">
+            <div onclick="changeHandler('controls')" class="controls-toggle">Hide Options</div>
             <div class="ui-text">
-                <div>Use <kbd>Arrow Keys</kbd> to nudge selected layer</div>
+                <h2>Noita Eye Cloud Moiré Pattern Explorer</h2>
+                <ol>
+                    <li>On init, the 9 clouds are arranged vertically in default order in a single column in Layer 1. </li>
+                    <ul class="second-level-bullet">
+                        <li><strong>Drag & drop</strong> clouds to change the vertical order.</li>
+                        <li>Click "Save" to keep your custom order in local storage.</li>
+                        <li>Left <kbd>Click</kbd> to <strong>rotate 90˚</strong>. (not savable yet)</li>
+                        <li><kbd>Shift</kbd>+<kbd>Click</kbd> to cause a cloud to overlap its neighbor above (1 click) or below (2 clicks), allowing exact "fitting" of clouds like W4 and E5. (not savable yet)</li>
+                    </ul>
+
+
+                    
+                    <li>You can save Layer 1 ordering to local storage. (Overlaps, rotations, and position saving TK)</li>
+                    <li>Click options to view mirrored and 90° rotated variants of Layer 1 (Layers 2 and 3/4).</li>
+                    <li>Add additional images (you may need to manually correct CSS scaling)</li>
+                    <li>Use the <kbd>Up</kbd>,<kbd>Down</kbd>,<kbd>Left</kbd>,and <kbd>Right</kbd> <kbd>Arrow Keys</kbd> to nudge layers 1px at a time.</li>
+                </ol>
+                
+                
+
+
+                
+            </div>
+            <div class="user-save">
+                <h3>Load/Save Arrangement</h3>
+                <button  onclick="changeHandler('saveorder')">Save Layer 1 order</button>
+                <div id="messages" class="pulsate"></div>
+            </div>
+            
+            <div class="buttons">
+                <h3>UI Options</h3>
+                <input type="checkbox" onclick="changeHandler('diamond')">Hide Diamond</input>
+                <input type="checkbox"  onclick="changeHandler('trigrams')">Trigram Borders</input>
+                <input type="checkbox"  onclick="changeHandler('cloudnames')" checked>Cloud Names</input>
+                <input type="checkbox"  onclick="changeHandler('eyecolors')" checked>Eye Colors</input>
+                <input type="checkbox"  onclick="changeHandler('addlayer')">Layer 2 (Mirror)</input>
+                <input type="checkbox"  onclick="changeHandler('addmirroredlayer')">Layers 3+4 (1+3, rotated)</input>
+                <!-- <input type="checkbox" onclick="changeHandler('trigramorder')">Reading Ordering</input> -->
+                
+            </div>
+            <div id="eyecolor-controls" class="custom-eye-colors">
+            <h3>Set Eye Colors by Direction <span onclick="changeHandler('eye-color-editor')">[+]</span></h3> 
+            <div class="hideable-eyecolors hide" > 
+                    <h5>Select a palate</h5> 
+                    <label for="epalate-analagous"><input id="epalate-analagous" type="radio" onchange="setEyePalate(value)" name="epalate-analagous"/>Analagous</label> 
+                    <label for="epalate-mono"><input id="epalate-mono" type="radio" onchange="setEyePalate(value)"  name="epalate-mono"/>Monochromatic</label>
+                    <label for="epalate-basic"><input id="epalate-basic" type="radio" onchange="setEyePalate(value)"  name="epalate-basic"/>Basic</label>
+                    <label for="epalate-colorful"><input id="epalate-colorful" type="radio" onchange="setEyePalate(value)"  name="epalate-colorful"/>Colorful</label>
+                    <h5>Set custom values:</h5> 
+                    <input type="color" value="#FF0000" onchange="setEyeColors('o', color)" name="eye-open"/>
+                    <input type="color" value="#0FF000" onchange="setEyeColors('u', color)" name="eye-up"/>
+                    <input type="color" value="#FFF000" onchange="setEyeColors('r', color)" name="eye-right"/>
+                    <input type="color" value="#000FF0" onchange="setEyeColors('d', color)" name="eye-down"/>
+                    <input type="color" value="#FF00F0" onchange="setEyeColors('l', color)" name="eye-left"/>
+                </div>
+            </div>
+            <div> 
+
+            </div>
+                
+            <div class="arrows">
+                <h3>Adjust layer positions</h3>
+                <div>Use <kbd>Arrow Keys</kbd> to nudge selected layer 1px</div>
                 <select id="change-layer-selection" onchange="changeSelectedLayer(value)">
                     <option value="0">Diamond</option>
                     <option value="1">Layer 1</option>
                     <option value="2">Layer 2</option>
                     <option value="3">Layers 3/4</option>
                 </select>
-                <div id="messages" class="pulsate"></div>
+                
             </div>
-            <div class="image-uploader">            
-                <label class="image-uploader-drop" for="image_uploads">Add more images here
-
+            <div class="image-uploader">  
+                <h3>Upload Custom Image</h3>
+                <h6>Files will only be shown in browser and will not be submitted online.</h6>          
+                <label class="image-uploader-drop" for="image_uploads">Drop image here to import
                     <input
                     type="file"
                     id="image_uploads"
@@ -27,17 +91,9 @@
                     accept=".jpg, .jpeg, .png"
                     multiple />
                 </label>
+                
+            </div>
             
-            </div>
-            <div class="buttons">
-                <button onclick="changeHandler('trigrams')">Trigram Borders</button>
-                <button onclick="changeHandler('cloudnames')">Cloud Names</button>
-                <button onclick="changeHandler('eyecolors')">Eye Colors</button>
-                <button onclick="changeHandler('addlayer')">Layer 2 (Mirror)</button>
-                <button onclick="changeHandler('addmirroredlayer')">Layers 3+4 (1+3, rotated)</button>
-                <!-- <button onclick="changeHandler('trigramorder')">Reading Ordering</button> -->
-                <button onclick="changeHandler('saveorder')">Save Layer 1 order</button>
-            </div>
         </div>
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
         <div id="svg-cloud-layer-r" class="wrapper"></div>
@@ -45,6 +101,7 @@
         <div id="diamond" class="show"></div>
         <div id="altars"></div>
         <div id="custom-image-layer"></div>  
+        <div onclick="changeHandler('controls')" class="hide controls-toggle">+ Options</div>
     </div>
 </div>
     <script src='./scripts/dragula.min.js'></script>

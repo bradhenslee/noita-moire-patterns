@@ -20,7 +20,8 @@ const diamond = document.getElementById("diamond");
 const imgUploader = document.getElementById("image_uploads");
 const customImageLayer = document.getElementById("custom-image-layer");
 const layerSelector = document.getElementById('change-layer-selection');
-
+const controls = document.getElementById('svg-layer-controls');
+const controlsToggle = document.querySelectorAll('.controls-toggle');
 const movableLayers = [diamond, svgCloudsLeft, svgCloudsRight, rotatedOverlays, customImageLayer];
 
 let selectedForMovement = 0; 
@@ -67,14 +68,29 @@ function changeHandler(v, newVal) {
     if (v == 'saveorder') saveOrder(getCurrentOrder())
     if (v == 'addlayer') addLayer() 
     if (v == 'addmirroredlayer') addMirroredLayer() 
+    if (v == 'controls') controls.classList.toggle('hide')
+    if (v == 'controls') toggleClass('.controls-toggle', 'hide')
     if (v == 'diamond') diamond.classList.toggle('show')
     if (v == 'altars') altars.classList.toggle('show')
-    if (v == 'trigramorder') toggleClass('.svg-cloud', 'hide-trigram-order')
+    // if (v == 'trigramorder') toggleClass('.svg-cloud', 'hide-trigram-order')
     if (v == 'trigrams') toggleClass('.svg-cloud', 'hide-trigrams')  
     if (v == 'cloudnames') toggleClass('.svg-cloud', 'hide-cloudnames')    
     if (v == 'eyecolors') toggleClass('.svg-cloud', 'hide-colors')  
+    if (v == 'eye-color-editor') toggleClass('.hideable-eyecolors', 'hide')  
+}
+const palates = {
+    basic: [ '#FF0000', '#0FF000', '#FFF000', '#000FF0', '#FF00F0' ],
+    analogous: ['#ff7100','#ffa400','#ffd700','#f4ff00','#c1ff00'],
+    monochromatic: [ '#2a2400', '#554800', '#806c00', '#aa8f00', '#d4b300' ],
+    tetradic: [ '#ffffff', '#ffd700', '#00ff58', '#0028ff', '#ff00a7'] 
 }
 
+function setEyeColors(eyeDir, newColor) {
+    debugger;
+}
+function setEyePalate() {
+    debugger;
+}
 // procedural - parse eyeData, populating layerDiv with nine "eyeclouds" ordered by displayOrder 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -86,7 +102,8 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         let cloudFrag = document.createDocumentFragment();
         let cloudDiv = document.createElement("div");
         // most initial states set here! 
-        let classes = `${cloudName} svg-cloud hide-trigram-order hide-colors hide-cloudnames hide-trigrams`;
+        // let classes = `${cloudName} svg-cloud hide-colors hide-names hide-trigrams`;
+        let classes = `${cloudName} svg-cloud hide-trigrams`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
@@ -117,13 +134,29 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     layerDiv.appendChild(eyeArrangementFrag);
     // TODO: move delegation up, combine listeners
     layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
-        el.addEventListener("mouseup", (e) => rotateCloud(e.currentTarget, e));
+        el.addEventListener("mouseup", (e) => clickedCloud(e.currentTarget, e));
     });
     messages.innerHTML = `Loaded saved order<br>${getCurrentOrder()}`;
 }
 function changeSelectedLayer(val) {
     selectedForMovement = val; 
     messages.innerHTML = `Layer selected: ${selectedForMovement}`;
+}
+function cycleMargin(el) {
+    let classes = Array.from(el.classList);
+    let state = classes.includes('overlap-top') ? 'top' : classes.includes('overlap-bottom') ? 'bottom' : false;
+    if (!state) el.classList.toggle('overlap-top');
+    if (state == 'top') {
+        el.classList.toggle('overlap-top');
+        el.classList.toggle('overlap-bottom');
+    }
+    if (state == 'bottom') el.classList.toggle('overlap-bottom')
+
+}
+
+function clickedCloud(el, e) {
+    if (e.shiftKey) cycleMargin(el)
+    else rotateCloud(el);
 }
 // Rotate a cloud 1/4 turn
 function rotateCloud(el) {
@@ -268,4 +301,17 @@ function addMovableImage(customImageLayer) {
 }
 
 }
-        
+ 
+
+// cloudarrangement = {    
+
+//     e5: {o: 1, x: 0, y: 0, margins: 0, r: 0 },
+//     w4: {o: 2, x: 0, y: 0, margins: -1, r: 0 },
+//     e1: {o: 3, x: 0, y: 0, margins: 0, r: 0 },
+//     e2: {o: 4, x: 0, y: 0, margins: 0, r: 0 },
+//     e3: {o: 5, x: 0, y: 0, margins: 0, r: 0 },
+//     e4: {o: 6, x: 0, y: 0, margins: 0, r: 0 },
+//     w1: {o: 7, x: 0, y: 0, margins: 0, r: 0 },
+//     w2: {o: 8, x: 0, y: 0, margins: 0, r: 0 },
+//     w3: {o: 9, x: 0, y: 0, margins: 0, r: 0 },
+//     }
