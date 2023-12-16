@@ -44,7 +44,7 @@ body { font-size: 1em; font-family: monospace; }
 .svg-cloud-row div.r { content: url("../images/eyeright-t.svg") }          /* 2 */
 .svg-cloud-row div.d { content: url("../images/eyedown-t.svg") }           /* 3 */
 .svg-cloud-row div.l { content: url("../images/eyeleft-t.svg") }           /* 4 */
-.svg-cloud-row div { border-radius: 50%; } /* for color effect only */ 
+/* .svg-cloud-row div { border-radius: 50%; } for color effect only  */
 /* // manual height values */
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
 .overlap-bottom.svg-cloud { margin-bottom: -14px; }
