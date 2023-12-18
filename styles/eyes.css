@@ -49,9 +49,9 @@ body { font-size: 1em; font-family: monospace; }
 .e1 { height: 56px;} .e2 { height: 70px;} .e3 { height: 84px;} .e4 { height: 70px;} .e5 { height: 70px;} .w1 { height: 56px;} .w2 { height: 56px;} .w3 { height: 70px;} .w4 { height: 70px;} 
 .overlap-bottom.svg-cloud { margin-bottom: -14px; }
 .overlap-top.svg-cloud { margin-top: -14px;}
-
+#mirror-layer { position: absolute; top: 68px; left: 18px; }
 #svg-cloud-layer-l, #svg-cloud-layer-l-m { position: absolute; top: 61px; left: 19px; }
-#svg-cloud-layer-r, #svg-cloud-layer-r-m { position: absolute; top: 68px; left: 18px; transform: matrix(-1, 0, 0, -1, 0, 0); }
+#svg-cloud-layer-r, #svg-cloud-layer-r-m {  transform: matrix(-1, 0, 0, -1, 0, 0); }
 #svg-cloud-layer-l-m, #svg-cloud-layer-r-m { rotate: 0.25turn; position: absolute; top: 0;}
 #move-controls {display: flex; flex-direction: column;}
 
@@ -78,33 +78,54 @@ body { font-size: 1em; font-family: monospace; }
 
 .hide-trigrams .svg-cloud-row span p::after { visibility: hidden; }
 .hide-trigram-order .svg-cloud-row span p::before { visibility: hidden; }
-.hide-colors .svg-cloud-row div { image-rendering: pixelated; background-color: rgba(0, 0, 0, 0) !important; } 
+.hide-eye-colors .svg-cloud-row div { image-rendering: pixelated; background-color: rgba(0, 0, 0, 0) !important; } 
 .show { visibility: visible !important; }
 .hide { visibility: collapse; display: table;}
 .hide-cloudnames::after { visibility: hidden; }
-.controls { background-color: midnightblue; 
-    color: white;
-    display: flex;
+
+.options { 
+        display: flex;
+        flex-direction: column;
+        padding: 6px;
+        width: 400px;
+        z-index: 99;
     position: relative;
-    left: 500px;
-    flex-direction: column;
-    padding: 6px;
-    width: 500px;
+    align-self: baseline;
 }
+.options details:not([open]) > summary {
+    /* background-color: #ccf; */
+}
+.options details[open] {
+    width: 100%;
+    background-color: darkslateblue;
+    color: bisque;
+}
+
 .sticky-option { position: fixed; position: absolute; bottom: 10px; right: 10px;}
-.controls-toggle { background-color: red; color: yellow;
-    background-color: red;
-    color: yellow;
+.controls-toggle { 
+    background-color: red; color: yellow;
     position: fixed;
     top: 95%;
     left: 95%;
 }
 .arrows { border: 1px dotted red; margin: 5px; }
 .custom-eye-colors { border: 1px dotted blueviolet; margin: 5px; }
-.buttons { border: 1px dotted cyan; margin: 5px; }
+.buttons { border: 1px dotted cyan;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: linen;
+    color: midnightblue;
+    height: 20px;
+    display: flex;
+    width: 100%;
+    z-index: 1111;
+}
 .controls .controls-toggle { position: relative; right: calc(-100% + 90px); top: 100%; text-align: right; width: fit-content; }
 .ui-text { padding:5px; display: flex;     flex-direction: column; }
-button { border-radius: 1px; border-style: none; font-family: monospace; margin: 1px; }
+button { border-radius: 1px; border-style: 1px red dotted; font-family: monospace; margin: 1px; }
 .image-uploader { color: yellow; border: 1px dashed yellow; display: block; }
 .image-uploader-drop { 
     border: 3px dashed yellow;
@@ -115,8 +136,7 @@ button { border-radius: 1px; border-style: none; font-family: monospace; margin:
     display: inline-table;
 }
 .image-uploader-drop input { opacity: 0; }
-.pulsate { -webkit-animation: pulsate 0.5s ease-in-out; -webkit-animation-iteration-count: 2; opacity: 1; }
-@-webkit-keyframes pulsate { 0% { opacity: 0.5; } 50% { opacity: 1.0; } 100% { opacity: 0.5; } }
+@-webkit-keyframes pulsate { 0% { opacity: 0.6; } 50% { opacity: 1.0; } 100% { opacity: 0.6; } }
 kbd {
     background-color: #ccc;
     border-radius: 3px;
@@ -131,6 +151,17 @@ kbd {
 }
 #eyecolor-controls input[type="radio"] { margin: 0px; opacity: 0; width: 0; }
 #eyecolor-controls label { border: 1px inset white; }
+.pulsate { -webkit-animation: pulsate 0.5s ease-in-out; -webkit-animation-iteration-count: 2; }
+#messages { position: absolute; 
+    top: 50%; left: 0; width: 100%;
+    text-align: center;
+    font-size: xx-large;
+    -webkit-text-stroke: 1px red;
+    -webkit-text-fill-color: white;
+    opacity: 0;
+    z-index: 99;
+    background-color: azure;
+} 
 input[type="color"] { -webkit-appearance: none; border: none; width: 32px; height: 32px; }
 input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
 input[type="color"]::-webkit-color-swatch { border: none; }

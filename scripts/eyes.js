@@ -12,17 +12,28 @@ const eyeData = {
 "e5": ["uuuouldolooouoooooouorudrddurouldolludd", "ddroluoorrrrldururldoldodoouuoruuuurldo", "uourulrrddororloulullrurrrrrdorurrudrdd", "dodluuorrlouroroludoroorrlrlrorlodluror", "ouluuouuluoduuuouorlouuorolouoouduooudo", "ruuruuudouuolluruuuurlodluourroloolurud", "uoroluolurruudludouddoudrldouuolrouorru", "ororodoorrloouourollrduuolruuuulroduuor", "udurrlrrorrrolu", "rdrllruoudduldu"]
 };
 
-const messages = document.getElementById("messages");
+const diamond = document.getElementById("diamond");
 const svgCloudsLeft = document.getElementById("svg-cloud-layer-l");
 const svgCloudsRight = document.getElementById("svg-cloud-layer-r");
+const mirrorLayer = document.getElementById("mirror-layer")
 const rotatedOverlays = document.getElementById("layer3layer4");
-const diamond = document.getElementById("diamond");
-const imgUploader = document.getElementById("image_uploads");
 const customImageLayer = document.getElementById("custom-image-layer");
+const messages = document.getElementById("messages");
+const imgUploader = document.getElementById("image_uploads");
 const layerSelector = document.getElementById('change-layer-selection');
 const controls = document.getElementById('svg-layer-controls');
 const controlsToggle = document.querySelectorAll('.controls-toggle');
-const movableLayers = [diamond, svgCloudsLeft, svgCloudsRight, rotatedOverlays, customImageLayer];
+const movableLayers = [diamond, svgCloudsLeft, mirrorLayer, rotatedOverlays, customImageLayer];
+const palates = {   basic: [ '#ff0000', '#0ff000', '#fff000', '#000ff0', '#ff00f0' ],
+                    analogous: ['#ff7100','#ffa400','#ffd700','#f4ff00','#c1ff00'],
+                    monochromatic: [ '#2a2400', '#554800', '#806c00', '#aa8f00', '#d4b300' ],
+                    tetradic: [ '#ffffff', '#ffd700', '#00ff58', '#0028ff', '#ff00a7'] }
+const eyeDirections = ['o','u','r','d','l'];
+const eyeValueMap = (eyeVal) => ({'o':0, 'u':1, 'r':2, 'd':3, 'l':4}[eyeVal]);
+const convertDirsToInts = (strArr) => strArr.split('').map(eye =>eyeValueMap(eye)).join('');
+const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 w3 e4 w4 e5";
+const displayOrder = userOrders.trim().split(' ');
+const moveKeys = { "ArrowUp": [-1,0], "ArrowDown": [1,0], "ArrowLeft": [0,-1], "ArrowRight": [0,1] }
 
 let selectedForMovement = 0; 
 
@@ -38,33 +49,33 @@ const drake = dragula([svgCloudsLeft]).on('drag', function (el) {
     messages.textContent = `New order:\n ${o}`;
 });
 
-const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 w3 e4 w4 e5";
-const displayOrder = userOrders.trim().split(' ');
+// event handling - other controls
 
-// event handling - moveable elements
+imgUploader.addEventListener("change", updateImageDisplay);
+
+// KEYBOARD EVENT LISTENER
 document.addEventListener("keydown", function(e) {
+    if (e.key == 'l') changeSelectedLayer()     
     if (Object.keys(moveKeys).includes(e.key)) {
         e.preventDefault();
         moveDiv(moveKeys[e.key])}
 });
 function moveDiv(vh) {
     const $movable = movableLayers[selectedForMovement];
-    console.log('movable:',$movable)
-    let top = $movable.offsetTop
-    let left = $movable.offsetLeft
-    if (vh[0] == -1) $movable.style.top = top - 1 + 'px'
-    if (vh[0] == 1) $movable.style.top = top + 1 + 'px'
-    if (vh[1] == -1) $movable.style.left = left - 1 + 'px'
-    if (vh[1] == 1) $movable.style.left = left + 1 + 'px'
+    console.log('trying to move movable:',$movable)
+    let topVal = () => $movable.offsetTop
+    let leftVal = () => $movable.offsetLeft
+    if (vh[0] == -1) $movable.style.top = topVal() - 1 + 'px'
+    if (vh[0] == 1) $movable.style.top = topVal() + 1 + 'px'
+    if (vh[1] == -1) $movable.style.left = leftVal() - 1 + 'px'
+    if (vh[1] == 1) $movable.style.left = leftVal() + 1 + 'px'
 }
-
-// event handling - other controls
-const toggleClass = (parentClass, toggleClass) => document.querySelectorAll(parentClass)
-.forEach(el => el.classList.toggle(toggleClass));
-
-imgUploader.addEventListener("change", updateImageDisplay);
-
+function toggleClass(parentClass, toggleClass) {
+    document.querySelectorAll(parentClass)
+        .forEach(el => el.classList.toggle(toggleClass))
+}
 function changeHandler(v, newVal) {
+    console.log('changehandler:', v)
     if (v == 'saveorder') saveOrder(getCurrentOrder())
     if (v == 'addlayer') addLayer() 
     if (v == 'addmirroredlayer') addMirroredLayer() 
@@ -75,21 +86,25 @@ function changeHandler(v, newVal) {
     // if (v == 'trigramorder') toggleClass('.svg-cloud', 'hide-trigram-order')
     if (v == 'trigrams') toggleClass('.svg-cloud', 'hide-trigrams')  
     if (v == 'cloudnames') toggleClass('.svg-cloud', 'hide-cloudnames')    
-    if (v == 'eyecolors') toggleClass('.svg-cloud', 'hide-colors')  
-    if (v == 'eye-color-editor') toggleClass('.hideable-eyecolors', 'hide')  
-}
-const palates = {
-    basic: [ '#FF0000', '#0FF000', '#FFF000', '#000FF0', '#FF00F0' ],
-    analogous: ['#ff7100','#ffa400','#ffd700','#f4ff00','#c1ff00'],
-    monochromatic: [ '#2a2400', '#554800', '#806c00', '#aa8f00', '#d4b300' ],
-    tetradic: [ '#ffffff', '#ffd700', '#00ff58', '#0028ff', '#ff00a7'] 
+    if (v == 'hide-eye-colors') toggleClass('.svg-cloud', 'hide-eye-colors')  
 }
 
-function setEyeColors(eyeDir, newColor) {
-    debugger;
+
+function setEyeColor(eyeDir, newColor) {    
+    // TODO pretty wasteful but not problematic
+    // alternative 1: JS modifies stylesheet.rules to override .o.u.r.d.l class's backgroundColor value 
+    // alternative 2: hard code SVGs so JS can modify the source SVG colors
+    document.querySelectorAll(`.${eyeDir}`).forEach(x => x.style.backgroundColor = newColor);
 }
-function setEyePalate() {
-    debugger;
+
+function setEyePalate(palateName) {
+    if (!palateName) debugger; 
+    else {
+        console.log(' setEyePalate() name:', palateName);
+    let colorsArr = palates[palateName]
+    eyeDirections.map((eyeDir, i) => {
+        setEyeColor(eyeDir, colorsArr[i])
+    })}
 }
 // procedural - parse eyeData, populating layerDiv with nine "eyeclouds" ordered by displayOrder 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
@@ -103,7 +118,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         let cloudDiv = document.createElement("div");
         // most initial states set here! 
         // let classes = `${cloudName} svg-cloud hide-colors hide-names hide-trigrams`;
-        let classes = `${cloudName} svg-cloud hide-trigrams`;
+        let classes = `${cloudName} svg-cloud hide-trigrams hide-eye-colors`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
@@ -137,6 +152,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         el.addEventListener("mouseup", (e) => clickedCloud(e.currentTarget, e));
     });
     messages.innerHTML = `Loaded saved order<br>${getCurrentOrder()}`;
+    setEyePalate('analogous');
 }
 function changeSelectedLayer(val) {
     selectedForMovement = val; 
@@ -196,7 +212,6 @@ function addMirroredLayer() {
     rotatedOverlays.appendChild(right);
 }
 
-const moveKeys = { "ArrowUp": [-1,0], "ArrowDown": [1,0], "ArrowLeft": [0,-1], "ArrowRight": [0,1] }
 
 function readEyeData(eyeData) {
     let ret = {};
@@ -230,8 +245,6 @@ function readEyeData(eyeData) {
     console.table(ret)
     return ret;
 }
-const eyeValueMap = (eyeVal) => ({'o':0, 'u':1, 'r':2, 'd':3, 'l':4}[eyeVal]);
-const convertDirsToInts = (strArr) => strArr.split('').map(eye =>eyeValueMap(eye)).join('');
 
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 readEyeData(eyeData);
@@ -259,7 +272,6 @@ return fileTypes.includes(file.type);
 function updateImageDisplay() {
     while (customImageLayer.firstChild) customImageLayer.removeChild(customImageLayer.firstChild);
     
-
     const curFiles = imgUploader.files;
     if (curFiles.length === 0) {
         const para = document.createElement("p");
@@ -277,9 +289,9 @@ function updateImageDisplay() {
             file.size,
             )}.`;
             const image = document.createElement("img");
+            // image.alt = image.title = file.name;
             image.src = URL.createObjectURL(file);
 
-            // image.alt = image.title = file.name;
 
             listItem.appendChild(image);
             // listItem.appendChild(para);
