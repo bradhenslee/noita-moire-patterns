@@ -71,15 +71,15 @@
         <label for="input-ck-cloudnames"><input type="checkbox" id="input-ck-cloudnames" onchange="changeHandler('cloudnames')" checked />Cloud Names</label>
         <label for="input-ck-diamond"><input type="checkbox" id="input-ck-diamond" onchange="changeHandler('diamond')" />Hide Diamond</label>
         <label for="input-ck-trigrams"><input type="checkbox" id="input-ck-trigrams" onchange="changeHandler('trigrams')" />Trigram Borders</label>
-        <label for="input-ck-layer2"><input type="checkbox" id="input-ck-layer2" onchange="changeHandler('addlayer')" />Layer 2 (Mirror)</label>
-        <label for="input-ck-layer3"><input type="checkbox" id="input-ck-layer3" onchange="changeHandler('addmirroredlayer')" />Layers 3+4 (1+3, rotated)</label>
-        <button  onclick="changeHandler('saveorder')">Save Cloud Order</button>
+        <label for="input-ck-layer2"><input type="checkbox" id="input-ck-layer2" onchange="changeHandler('mirror-layer', this.checked)" />Layer 2 (Mirror)</label>
+        <label for="input-ck-layer3"><input type="checkbox" id="input-ck-layer3" onchange="changeHandler('rotated-mirror-layer', this.checked)" />Layers 3+4 (1+3, rotated)</label>
+        <button onclick="changeHandler('saveorder')">Save Cloud Order</button>
         <div id="messages"></div>
     </div>
     <div class="page">
         <div id="svg-cloud-layer-l" class="wrapper"></div>        
-        <div id="svg-cloud-layer-r" class="wrapper"></div>
-        <div id="mirror-layer"></div>
+        
+        <div id="mirror-layer"><div id="svg-cloud-layer-r" class="wrapper"></div></div>
         <div id="rotated-mirror-layer">
             <div id="layer3layer4"></div>
         </div>

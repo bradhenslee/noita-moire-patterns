@@ -70,7 +70,8 @@ body { font-size: 0.7em; font-family: monospace; }
     background-size: auto;
     position: absolute;
 }
-#mirror-layer { position: absolute; top: 68px; left: 18px; }
+#mirror-layer { position: absolute; top: 68px; left: 18px; visibility: hidden; }
+#rotated-mirror-layer { position: absolute; top: 68px; left: 18px; visibility: hidden; }
 #move-controls {display: flex; flex-direction: column;}
 
 .hide-trigrams .svg-cloud-row span p::after { visibility: hidden; }
@@ -144,7 +145,7 @@ kbd {
     -webkit-text-stroke: 1px red;
     -webkit-text-fill-color: white;
     opacity: 0;
-    z-index: 99;
+    z-index: -1;
     background-color: azure;
 } 
 input[type="color"] {
@@ -204,7 +205,7 @@ select#change-layer-selection {
 #color-input-r::after { position: relative; top: -12px; width: 13px; height: 7px; content: url("../images/eyeright-t.svg"); }    
 #color-input-d::after { position: relative; top: -12px; width: 13px; height: 7px; content: url("../images/eyedown-t.svg"); }     
 #color-input-l::after { position: relative; top: -12px; width: 13px; height: 7px; content: url("../images/eyeleft-t.svg"); }      */
-.link {color: yellowgreen;}
+.link {color: purple;}
 input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
 input[type="color"]::-webkit-color-swatch { border: none; }
 input[type="checkbox"]    {vertical-align: inherit;}

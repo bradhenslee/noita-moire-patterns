@@ -16,14 +16,14 @@ const diamond = document.getElementById("diamond");
 const svgCloudsLeft = document.getElementById("svg-cloud-layer-l");
 const svgCloudsRight = document.getElementById("svg-cloud-layer-r");
 const mirrorLayer = document.getElementById("mirror-layer")
-const rotatedOverlays = document.getElementById("rotated-mirror-layer");
+const rotatedMirrorLayer = document.getElementById("rotated-mirror-layer");
 const customImageLayer = document.getElementById("custom-image-layer");
 const messages = document.getElementById("messages");
 const imgUploader = document.getElementById("image_uploads");
 const layerSelector = document.getElementById('change-layer-selection');
 const controls = document.getElementById('svg-layer-controls');
 const controlsToggle = document.querySelectorAll('.controls-toggle');
-const movableLayers = [diamond, svgCloudsLeft, mirrorLayer, rotatedOverlays, customImageLayer];
+const movableLayers = [diamond, svgCloudsLeft, mirrorLayer, rotatedMirrorLayer, customImageLayer];
 const palates = {   basic: [ '#ff0000', '#0ff000', '#fff000', '#000ff0', '#ff00f0' ],
                     analogous: ['#ff7100','#ffa400','#ffd700','#f4ff00','#c1ff00'],
                     monochromatic: [ '#2a2400', '#554800', '#806c00', '#aa8f00', '#d4b300' ],
@@ -75,10 +75,10 @@ function toggleClass(parentClass, toggleClass) {
         .forEach(el => el.classList.toggle(toggleClass))
 }
 function changeHandler(v, newVal) {
-    console.log('changehandler:', v)
+    console.log('changehandler key:', v,'val:', newVal||null )
     if (v == 'saveorder') saveOrder(getCurrentOrder())
-    if (v == 'addlayer') addLayer() 
-    if (v == 'addmirroredlayer') addMirroredLayer() 
+    if (v == 'mirror-layer') toggleMirrorLayer(newVal) 
+    if (v == 'rotated-mirror-layer') toggleRotatedMirroredLayer(newVal) 
     if (v == 'controls') controls.classList.toggle('hide')
     if (v == 'controls') toggleClass('.controls-toggle', 'hide')
     if (v == 'diamond') diamond.classList.toggle('show')
@@ -155,9 +155,9 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     });
     layerDiv.appendChild(eyeArrangementFrag);
     // TODO: move delegation up, combine listeners
-    layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
-        el.addEventListener("mouseup", (e) => clickedCloud(e.currentTarget, e));
-    });
+    // layerDiv.querySelectorAll('.svg-cloud').forEach(el => {
+    //     el.addEventListener("mouseup", (e) => clickedCloud(e.currentTarget, e));
+    // });
     messages.innerHTML = `Loaded saved order<br>${getCurrentOrder()}`;
     setEyePalate('analogous');
 }
@@ -217,18 +217,33 @@ const saveOrder = () => {
     messages.textContent = `Saved order to HTML5 local storage:\n ${order}`;
 }
 
-function addLayer() {
-    let newLayer = svgCloudsLeft.cloneNode(true)      
-    newLayer.id = "svg-cloud-layer-r" 
-    svgCloudsRight.replaceWith(newLayer);    
+function toggleMirrorLayer(val) {
+        let classes = Array.from(mirrorLayer.classList);
+        if (classes.includes('cloned')) {
+            if (val) mirrorLayer.classList.add('show')
+            else mirrorLayer.classList.remove('show')
+        } else {
+            let newLayer = svgCloudsLeft.cloneNode(true)      
+            newLayer.id = "svg-cloud-layer-r"
+            svgCloudsRight.replaceWith(newLayer);  
+            mirrorLayer.setAttribute('class','cloned show');
+        }
 }
-function addMirroredLayer() {
-    let left = svgCloudsLeft.cloneNode(true);
-    let right = svgCloudsRight.cloneNode(true);
-    left.id = "svg-cloud-layer-l-m"; 
-    right.id = "svg-cloud-layer-r-m";    
-    rotatedOverlays.appendChild(left);
-    rotatedOverlays.appendChild(right);
+
+function toggleRotatedMirroredLayer(val) {
+    let classes = Array.from(rotatedMirrorLayer.classList);
+    if (classes.includes('cloned')) {
+        if (val) rotatedMirrorLayer.classList.add('show');
+        else rotatedMirrorLayer.classList.remove('show');
+    } else {
+        let left = svgCloudsLeft.cloneNode(true);
+        left.id = "svg-cloud-layer-l-m"; 
+        let right = svgCloudsRight.cloneNode(true);
+        right.id = "svg-cloud-layer-r-m";    
+        rotatedMirrorLayer.appendChild(left);
+        rotatedMirrorLayer.appendChild(right);
+        rotatedMirrorLayer.setAttribute('class','cloned show');
+    }
 }
 
 
@@ -335,17 +350,17 @@ function addMovableImage(customImageLayer) {
 // Fetch all the details element.
 const details = document.querySelectorAll("details");
 
-// Add the onclick listeners.
-details.forEach((targetDetail) => {
-  targetDetail.addEventListener("click", () => {
-    // Close all the details that are not targetDetail.
-    details.forEach((detail) => {
-      if (detail !== targetDetail) {
-        detail.removeAttribute("open");
-      }
-    });
-  });
-}); 
+// // Add the onclick listeners.
+// details.forEach((targetDetail) => {
+//   targetDetail.addEventListener("click", () => {
+//     // Close all the details that are not targetDetail.
+//     details.forEach((detail) => {
+//       if (detail !== targetDetail) {
+//         detail.removeAttribute("open");
+//       }
+//     });
+//   });
+// }); 
 
 // cloudarrangement = {    
 
