@@ -166,6 +166,7 @@ function changedSelectedLayer(val) {
     messages.innerHTML = `Layer selected: ${selectedForMovement}`;
 }
 function changeSelectedLayer(val) {
+    layerSelector.selectedIndex = val;
     selectedForMovement = val; 
     messages.innerHTML = `Layer selected: ${selectedForMovement}`;
 }
