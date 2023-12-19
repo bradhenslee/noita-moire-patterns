@@ -16,7 +16,7 @@ const diamond = document.getElementById("diamond");
 const svgCloudsLeft = document.getElementById("svg-cloud-layer-l");
 const svgCloudsRight = document.getElementById("svg-cloud-layer-r");
 const mirrorLayer = document.getElementById("mirror-layer")
-const rotatedOverlays = document.getElementById("layer3layer4");
+const rotatedOverlays = document.getElementById("rotated-mirror-layer");
 const customImageLayer = document.getElementById("custom-image-layer");
 const messages = document.getElementById("messages");
 const imgUploader = document.getElementById("image_uploads");
@@ -90,7 +90,7 @@ function changeHandler(v, newVal) {
 }
 
 
-function setEyeColor(eyeDir, newColor) {    
+function setEyeColor(eyeDir, newColor, palate) {
     // TODO pretty wasteful but not problematic
     // alternative 1: JS modifies stylesheet.rules to override .o.u.r.d.l class's backgroundColor value 
     // alternative 2: hard code SVGs so JS can modify the source SVG colors
@@ -100,12 +100,19 @@ function setEyeColor(eyeDir, newColor) {
 function setEyePalate(palateName) {
     if (!palateName) debugger; 
     else {
+        // debugger;
+     let colorInputs = document.getElementById('color-inputs')
+        .querySelectorAll('input');
         console.log(' setEyePalate() name:', palateName);
     let colorsArr = palates[palateName]
-    eyeDirections.map((eyeDir, i) => {
-        setEyeColor(eyeDir, colorsArr[i])
+    let colorInputsArr = Array.from(colorInputs)
+    colorInputsArr.map((inputEl, i) => {
+        inputEl.value = colorsArr[i];      
+        setEyeColor(eyeDirections[i],colorsArr[i]);  
     })}
 }
+
+
 // procedural - parse eyeData, populating layerDiv with nine "eyeclouds" ordered by displayOrder 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -158,20 +165,32 @@ function changeSelectedLayer(val) {
     selectedForMovement = val; 
     messages.innerHTML = `Layer selected: ${selectedForMovement}`;
 }
-function cycleMargin(el) {
-    let classes = Array.from(el.classList);
-    let state = classes.includes('overlap-top') ? 'top' : classes.includes('overlap-bottom') ? 'bottom' : false;
+function cycleVMargin(el) {
+let classes = Array.from(el.classList);
+let state = classes.includes('overlap-top') ? 'top' : classes.includes('overlap-bottom') ? 'bottom' : false;
     if (!state) el.classList.toggle('overlap-top');
     if (state == 'top') {
         el.classList.toggle('overlap-top');
         el.classList.toggle('overlap-bottom');
     }
     if (state == 'bottom') el.classList.toggle('overlap-bottom')
-
+}
+function cycleHMargin(el) {
+let classes = Array.from(el.classList);
+let state = classes.includes('overlap-left') ? 'left' : classes.includes('overlap-right') ? 'right' : false;
+    if (!state) el.classList.toggle('overlap-left');
+    if (state == 'left') {
+        el.classList.toggle('overlap-left');
+        el.classList.toggle('overlap-right');
+    }
+    if (state == 'right') el.classList.toggle('overlap-right')
 }
 
+
+
 function clickedCloud(el, e) {
-    if (e.shiftKey) cycleMargin(el)
+    if (e.shiftKey) cycleVMargin(el)
+    else if (e.altKey) cycleHMargin(el)
     else rotateCloud(el);
 }
 // Rotate a cloud 1/4 turn
@@ -313,7 +332,20 @@ function addMovableImage(customImageLayer) {
 }
 
 }
- 
+// Fetch all the details element.
+const details = document.querySelectorAll("details");
+
+// Add the onclick listeners.
+details.forEach((targetDetail) => {
+  targetDetail.addEventListener("click", () => {
+    // Close all the details that are not targetDetail.
+    details.forEach((detail) => {
+      if (detail !== targetDetail) {
+        detail.removeAttribute("open");
+      }
+    });
+  });
+}); 
 
 // cloudarrangement = {    
 

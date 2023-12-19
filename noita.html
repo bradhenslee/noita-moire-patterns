@@ -5,90 +5,87 @@
     <link rel="stylesheet" href="./styles/dragula.css">
 </head>
 <body>
-    <div class="buttons">
-        <div class="options">
+    <div id="control-strip">
+        <details class="details-info">
+            <summary>INFORMATION</summary>               
+            <h1>Noita Eye Glyphs Moiré pattern viewer</h1>
+            <h5>Suggestions for Exploring Patterns</h5>
+            <p>On refresh, the nine "clouds" of Eye Glyphs are shown arranged vertically as Layer 1. You can reorder the clouds with drag and drop, and save the order to localstorage.  
+            </p>
+            <ul>
+                <li>Left <kbd>Click</kbd> to <strong>rotate 90˚</strong>. (not savable yet)</li>
+                <li><kbd>Shift</kbd>+<kbd>Click</kbd> to cause a cloud to overlap its neighbor above (1 click) or below (2 clicks), allowing exact "fitting" of clouds like W4 and E5. (not savable yet)</li>
+                <li>Click options to view mirrored and 90° rotated variants of Layer 1 (Layers 2 and 3/4).</li>
+                <li>Add additional images (you may need to manually correct CSS scaling)</li>
+                <li>Use the <kbd>Up</kbd>,<kbd>Down</kbd>,<kbd>Left</kbd>,and <kbd>Right</kbd> <kbd>Arrow Keys</kbd> to nudge layers 1px at a time.</li>
+            </ul>
+            <h6>What is this though </h6>
+            <p>This is a tool for investigating various mysteriously textured pixel art images from the game Noita (including the infamous Eye Glyphs), which produce striking moiré patterns with obvious stenographic capacity when viewed as stacked offset layers. Hopefully it can help discover how a message could be implemented with this scheme, even if there's no message to be found in Noita!</p>
+            <p>Indeed, the Eye Glyph puzzle probably has a boring non-visual solution instead, with clues admittedly pointing toward <a class="link" href="https://docs.google.com/document/d/1s6gxrc1iLJ78iFfqC2d4qpB9_r_c5U5KwoHVYFFrjy0">one specific "trigram" parsing of the eyes as base5 values</a>. So, the app has some tools for that too, including customizable eye background color rules, an overlay of the trigram pattern, and ordering / reading output features to come.</p>
+        </details>
+        <details class="details-import">
+            <summary>Import image</summary>
+            <h6>Files you import will only be shown in browser and will not be submitted online.</h6>          
+            <label class="image-uploader-drop" for="image_uploads">Drop an image here to import, or click to pick!<input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple />
+            </label>
+            <p>
+                Your image will be selected to move with the arrow keys.
 
-            <details open>
-                <summary>OPTIONS</summary>
-                <details id="eyecolor-controls" class="custom-eye-colors">
-                    <summary>Set Eye Colors by Direction</summary> 
+            </p>
+            <p>Image wrong scale? Try resizing to 1:1 pixel scaling, or manually tweaking the new element's CSS with attributes like <code>scale(0.25)</code>.</p> 
+            <p>
+                
+                
+            </p>
+        </details>
+        
+        <details id="eyecolor-controls" class="custom-eye-colors details-eyecolors">
+            <summary>Set Eye Colors by Direction</summary> 
+            <label for="show-eye-color-input"><input type="checkbox" id="show-eye-color-input" onclick="changeHandler('hide-eye-colors')">Show Eye Colors</label>
+                <p>Note that eye values are not recalculated when rotated here, even though that should be giving them different values.</p> 
                     <h5>Select a palate</h5> 
                     <input checked value="analogous" id="epalate-analogous" type="radio" onchange="setEyePalate('analogous')" name="epalate" /><label for="epalate-analogous">Analogous</label>
                     <input value="tetradic" id="epalate-tetradic" type="radio" onchange="setEyePalate('tetradic')" name="epalate" /><label for="epalate-tetradic">White+Tetradic</label>
                     <input value="monochromatic" id="epalate-mono" type="radio" onchange="setEyePalate('monochromatic')" name="epalate" /><label for="epalate-mono">Monochromatic</label>
                     <input value="basic" id="epalate-basic" type="radio" onchange="setEyePalate('basic')" name="epalate" /><label for="epalate-basic">Basic</label>
-                    <h5>Set custom values:</h5> 
-                    <input id="color-input-o" type="color" value="#ff0000" onchange="setEyeColor('o', value)" name="eye-open"/>
-                    <input id="color-input-u" type="color" value="#0ff000" onchange="setEyeColor('u', value)" name="eye-up"/>
-                    <input id="color-input-r" type="color" value="#fff000" onchange="setEyeColor('r', value)" name="eye-right"/>
-                    <input id="color-input-d" type="color" value="#000ff0" onchange="setEyeColor('d', value)" name="eye-down"/>
-                    <input id="color-input-l" type="color" value="#ff00f0" onchange="setEyeColor('l', value)" name="eye-left"/>
-                </details>            
-                <details class="arrows">
-                    <summary>Adjust layer positions</summary>
-                    <div>Use <kbd>Arrow Keys</kbd> to nudge selected layer 1px</div>
-                    <select id="change-layer-selection" onchange="changeSelectedLayer(value)">
-                        <option value="0">Diamond</option>
-                        <option value="1">Layer 1</option>
-                        <option value="2">Layer 2</option>
-                        <option value="3">Layers 3/4</option>
-                    </select>
-                </details> 
-                <details class="image-uploader">
-                    <summary>Upload Custom Image</summary>
-                    <h6>Files will only be shown in browser and will not be submitted online.</h6>          
-                    <label class="image-uploader-drop" for="image_uploads">Drop image here to import
-                        <input
-                        type="file"
-                        id="image_uploads"
-                        name="image_uploads"
-                        accept=".jpg, .jpeg, .png"
-                        multiple />
-                    </label>
-                </details>
-                    
-                    <details>                      
-                        <summary>How to see weird patterns</summary>
-                        <p>On refresh, the nine "clouds" of Eye Glyphs are shown arranged vertically as Layer 1. You can reorder the clouds with drag and drop, and save the order to localstorage.  
-                        </p>
-                        <ul>
-                            <li>Left <kbd>Click</kbd> to <strong>rotate 90˚</strong>. (not savable yet)</li>
-                            <li><kbd>Shift</kbd>+<kbd>Click</kbd> to cause a cloud to overlap its neighbor above (1 click) or below (2 clicks), allowing exact "fitting" of clouds like W4 and E5. (not savable yet)</li>
-                            <li>Click options to view mirrored and 90° rotated variants of Layer 1 (Layers 2 and 3/4).</li>
-                            <li>Add additional images (you may need to manually correct CSS scaling)</li>
-                            <li>Use the <kbd>Up</kbd>,<kbd>Down</kbd>,<kbd>Left</kbd>,and <kbd>Right</kbd> <kbd>Arrow Keys</kbd> to nudge layers 1px at a time.</li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>What is this though</summary>
-                        <h1>Noita Eye Glyphs Moiré pattern viewer</h1>
-                        <p>This is a tool for investigating various mysteriously textured pixel art images from the game Noita (including the infamous Eye Glyphs), which produce striking Moiré patterns with stenographic capacity when viewed as stacked offset layers.</p>
-                        <p>The app includes additional tools for the separate application of visualizing the eyes in base5 trigram shapes and with customizable eye background color rules.</p>
-                    </details>
-                    
-            </details>
-            
+                    <h5>Set custom values:</h5>
+                    <div id="color-inputs">
+
+                        <input id="color-input-o" type="color" value="#ff0000" onchange="setEyeColor('o', value)" name="eye-open"/>
+                        <input id="color-input-u" type="color" value="#0ff000" onchange="setEyeColor('u', value)" name="eye-up"/>
+                        <input id="color-input-r" type="color" value="#fff000" onchange="setEyeColor('r', value)" name="eye-right"/>
+                        <input id="color-input-d" type="color" value="#000ff0" onchange="setEyeColor('d', value)" name="eye-down"/>
+                        <input id="color-input-l" type="color" value="#ff00f0" onchange="setEyeColor('l', value)" name="eye-left"/>
+                    </div> 
+        </details>  
+        <div class="arrows">
+            Arrow Keys move: 
+            <select id="change-layer-selection" onchange="changeSelectedLayer(value)">
+                <option value="0">Diamond</option>
+                <option value="1">Eyeclouds Layer 1</option>
+                <option value="2">Layer 2</option>
+                <option value="3">Layers 3/4</option>
+            </select>
         </div>
-        <input type="checkbox" onclick="changeHandler('cloudnames')" checked>Cloud Names</input>
-        <input type="checkbox" onclick="changeHandler('hide-eye-colors')">Eye Colors</input>
-        <input type="checkbox" onclick="changeHandler('diamond')">Hide Diamond</input>
-        <input type="checkbox" onclick="changeHandler('trigrams')">Trigram Borders</input>
-        <input type="checkbox" onclick="changeHandler('addlayer')">Layer 2 (Mirror)</input>
-        <input type="checkbox" onclick="changeHandler('addmirroredlayer')">Layers 3+4 (1+3, rotated)</input>
+
+        <label for="input-ck-cloudnames"><input type="checkbox" id="input-ck-cloudnames" onchange="changeHandler('cloudnames')" checked />Cloud Names</label>
+        <label for="input-ck-diamond"><input type="checkbox" id="input-ck-diamond" onchange="changeHandler('diamond')" />Hide Diamond</label>
+        <label for="input-ck-trigrams"><input type="checkbox" id="input-ck-trigrams" onchange="changeHandler('trigrams')" />Trigram Borders</label>
+        <label for="input-ck-layer2"><input type="checkbox" id="input-ck-layer2" onchange="changeHandler('addlayer')" />Layer 2 (Mirror)</label>
+        <label for="input-ck-layer3"><input type="checkbox" id="input-ck-layer3" onchange="changeHandler('addmirroredlayer')" />Layers 3+4 (1+3, rotated)</label>
         <button  onclick="changeHandler('saveorder')">Save Cloud Order</button>
-        
+        <div id="messages"></div>
     </div>
     <div class="page">
-        <div id="messages" class="pulsate"></div>
-             <div id="svg-cloud-layer-l" class="wrapper"></div>        
-            <div id="mirror-layer">
-                <div id="svg-cloud-layer-r" class="wrapper"></div>
+        <div id="svg-cloud-layer-l" class="wrapper"></div>        
+        <div id="svg-cloud-layer-r" class="wrapper"></div>
+        <div id="mirror-layer"></div>
+        <div id="rotated-mirror-layer">
+            <div id="layer3layer4"></div>
         </div>
-        <div id="layer3layer4"></div>
         <div id="diamond" class="show"></div>
         <div id="altars"></div>
-        <div id="custom-image-layer"></div>  
-        
+        <div id="custom-image-layer"></div>
     </div>
 </div>
     <script src='./scripts/dragula.min.js'></script>
