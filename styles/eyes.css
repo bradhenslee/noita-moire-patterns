@@ -53,13 +53,14 @@ body { font-size: 0.7em; font-family: monospace; }
 .overlap-right.svg-cloud { margin-left: 12px;}
 #svg-cloud-layer-l, #svg-cloud-layer-l-m { position: absolute; top: 61px; left: 19px; }
 #svg-cloud-layer-r, #svg-cloud-layer-r-m {  transform: matrix(-1, 0, 0, -1, 0, 0); }
-#svg-cloud-layer-l-m, #svg-cloud-layer-r-m { rotate: 0.25turn; position: absolute; top: 0;}
+#svg-cloud-layer-l-m { rotate: 0.25turn; position: absolute; top: 0;}
+#svg-cloud-layer-r-m { rotate: 0.25turn; position: absolute; left:12px; top: -1px;}
 
 #diamond {
     visibility: hidden;
     background-image: url(../images/diamond-cleared.png);
     image-rendering: pixelated; background-size: auto; position: absolute;
-    height: 266px; width: 219px; left: 154px; top: 228px;
+    height: 263px; width: 219px; left: 154px; top: 228px;
     scale: 1;
     z-index: -1;
 }
@@ -209,3 +210,67 @@ select#change-layer-selection {
 input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
 input[type="color"]::-webkit-color-swatch { border: none; }
 input[type="checkbox"]    {vertical-align: inherit;}
+
+.lines {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+  .lines--spinning1,.lines--spinning2, .lines--spinning3, .lines--spinning3, .lines--spinning4 { position: absolute; }
+  .lines--spinning1 {
+    -webkit-animation: spin 10s ease-in-out infinite;
+            animation: spin 10s ease-in-out infinite;  }
+  .lines--spinning2 {
+    -webkit-animation: spin 8s ease-in-out infinite;
+            animation: spin 8s ease-in-out infinite;  }
+  .lines--spinning3 {
+    -webkit-animation: spin 12s ease-in-out infinite;
+            animation: spin 12s ease-in-out infinite;  }
+  
+  .lines--spinning3 {
+    -webkit-animation: spin 16s ease-in-out infinite;
+            animation: spin 16s ease-in-out infinite;  }
+  
+  .lines--spinning4 {
+    -webkit-animation: spin 12s linear infinite;
+            animation: spin 12s linear infinite;  }
+  
+  .circle1 {
+    width: 30%;
+    height: 0;
+    padding-bottom: 30%;
+    border: solid 8px white;
+    border-radius: 100%;
+    opacity: 10%;
+    -webkit-transform: translate(20%);
+            transform: translate(20%);
+  }
+  
+  .circle2 {
+    width: 30%;
+    height: 0;
+    padding-bottom: 30%;
+    border: solid 8px white;
+    border-radius: 100%;
+    opacity: 10%;
+    -webkit-transform: translate(-20%);
+            transform: translate(-20%);
+  }
+  
+  .border {
+    position: absolute;
+    width: 85%;
+    height: 0;
+    padding-bottom: 85%;
+    border: solid 800px white;
+    border-radius: 100%;
+  }
+  
+  @-webkit-keyframes spin { 0% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
+  
+  @keyframes spin { 0% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
+
+.rotated_0 {transform: rotate(0turn);}
+.rotated_3 {transform: rotate(0.25turn);}
+.rotated_6 {transform: rotate(0.5turn);}
+.rotated_9 {transform: rotate(0.75turn);}

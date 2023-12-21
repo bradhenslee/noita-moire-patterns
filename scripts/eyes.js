@@ -34,8 +34,10 @@ const convertDirsToInts = (strArr) => strArr.split('').map(eye =>eyeValueMap(eye
 const userOrders = window.localStorage.getItem('eye-orders') || "e1 w1 e2 w2 e3 w3 e4 w4 e5";
 const displayOrder = userOrders.trim().split(' ');
 const moveKeys = { "ArrowUp": [-1,0], "ArrowDown": [1,0], "ArrowLeft": [0,-1], "ArrowRight": [0,1] }
+const clockwiseRotationCycle = { rotated_0:'rotated_3', rotated_3:'rotated_6', rotated_6:'rotated_9', rotated_9:'rotated_0' }
 
 let selectedForMovement = 0; 
+let currentColors = [];
 
 const altars = document.getElementById("altars");
 const drake = dragula([svgCloudsLeft]).on('drag', function (el) {
@@ -89,19 +91,19 @@ function changeHandler(v, newVal) {
     if (v == 'hide-eye-colors') toggleClass('.svg-cloud', 'hide-eye-colors')  
 }
 
-
-function setEyeColor(eyeDir, newColor, palate) {
+function setEyeColor(eyeDir, newColor) {
     // TODO pretty wasteful but not problematic
     // alternative 1: JS modifies stylesheet.rules to override .o.u.r.d.l class's backgroundColor value 
     // alternative 2: hard code SVGs so JS can modify the source SVG colors
     document.querySelectorAll(`.${eyeDir}`).forEach(x => x.style.backgroundColor = newColor);
 }
 
+
 function setEyePalate(palateName) {
     if (!palateName) debugger; 
     else {
         // debugger;
-     let colorInputs = document.getElementById('color-inputs')
+    let colorInputs = document.getElementById('color-inputs')
         .querySelectorAll('input');
         console.log(' setEyePalate() name:', palateName);
     let colorsArr = palates[palateName]
@@ -125,7 +127,7 @@ function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
         let cloudDiv = document.createElement("div");
         // most initial states set here! 
         // let classes = `${cloudName} svg-cloud hide-colors hide-names hide-trigrams`;
-        let classes = `${cloudName} svg-cloud hide-trigrams hide-eye-colors`;
+        let classes = `${cloudName} svg-cloud hide-trigrams hide-eye-colors rotated_0`;
         cloudDiv.setAttribute('aria-label', cloudName)
         cloudDiv.setAttribute('class', classes);        
         // for each cloud build every row
@@ -198,14 +200,31 @@ function clickedCloud(el, e) {
     else if (e.altKey) cycleHMargin(el)
     else rotateCloud(el);
 }
+
+
+
 // Rotate a cloud 1/4 turn
 function rotateCloud(el) {
-    let currentAngle = el.style['-webkit-transform']
-    el.style.transform = (currentAngle === '') ? 'rotate(0.25turn)'
-    : (currentAngle === 'rotate(0.25turn)') ? 'rotate(0.5turn)'
-    : (currentAngle === 'rotate(0.5turn)') ? 'rotate(0.75turn)'
-    : (currentAngle === 'rotate(0.75turn)') ? '' : console.error('rotation not matched');
+    let rotations = Object.keys(clockwiseRotationCycle);
+    let newAngle = clockwiseRotationCycle[current];
+    el.classList.remove(current);
+    el.classList.add(newAngle);
+    let current = Array.from(el.classList).find( className => rotations.includes(className) );
+    let offsetInt = { 'rotated_0':0, 'rotated_3':1, 'rotated_6':2, 'rotated_9':3 }[newAngle]
+    let colorInputs = document.getElementById('color-inputs').querySelectorAll('input');
+    let colorInputsArr = Array.from(colorInputs).map(inputEl => inputEl.value);
+    let extendedColorCycleList = colorInputsArr.concat( colorInputsArr[1], colorInputsArr[2], colorInputsArr[3], colorInputsArr[4] )
+    extendedColorCycleList.map((colorVal, i) => {
+        let eyes = el.querySelectorAll('div')
+        eyes.forEach(eye => eye.style.backgroundColor = colorInputs[i + offsetInt]);
+    })
+    // 
 }
+const findRotatedEyeDirColor = (dir, rotatedColor) => {
+    let c = [ '#ffffff', '#ffd700', '#00ff58', '#0028ff', '#ff00a7']
+}
+
+
 
 const getCurrentOrder = (eyeLayer) => {
     let order = ''
@@ -248,7 +267,7 @@ function toggleRotatedMirroredLayer(val) {
     } else {
         let left = svgCloudsLeft.cloneNode(true);
         left.id = "svg-cloud-layer-l-m"; 
-        let right = svgCloudsRight.cloneNode(true);
+        let right = mirrorLayer.firstChild.cloneNode(true);
         right.id = "svg-cloud-layer-r-m";    
         rotatedMirrorLayer.appendChild(left);
         rotatedMirrorLayer.appendChild(right);
