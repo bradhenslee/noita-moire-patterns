@@ -40,21 +40,10 @@ let selectedForMovement = 0;
 let currentColors = [];
 
 const altars = document.getElementById("altars");
-const drake = dragula([svgCloudsLeft]).on('drag', function (el) {
-    messages.textContent = 'Dragging: ' + el.firstChild.ariaLabel;
-}).on('drop', function (el) {
-    messages.textContent = 'drop';
-}).on('over', function (el, container, source) {
-    
-}).on('out', function (el, container) {
-    let o = getCurrentOrder()
-    messages.textContent = `New order:\n ${o}`;
-});
-
+const drake = dragula([svgCloudsLeft]).on('drag', function (el) { messages.textContent = 'Dragging: ' + el.firstChild.ariaLabel; }).on('drop', function (el) { messages.textContent = 'drop'; }).on('over', function (el, container, source) { }).on('out', function (el, container) { let o = getCurrentOrder()
+    messages.textContent = `New order:\n ${o}`; });
 // event handling - other controls
-
 imgUploader.addEventListener("change", updateImageDisplay);
-
 // KEYBOARD EVENT LISTENER
 document.addEventListener("keydown", function(e) {
     if (e.key == 'l') changeSelectedLayer()     
@@ -90,15 +79,12 @@ function changeHandler(v, newVal) {
     if (v == 'cloudnames') toggleClass('.svg-cloud', 'hide-cloudnames')    
     if (v == 'hide-eye-colors') toggleClass('.svg-cloud', 'hide-eye-colors')  
 }
-
 function setEyeColor(eyeDir, newColor) {
     // TODO pretty wasteful but not problematic
     // alternative 1: JS modifies stylesheet.rules to override .o.u.r.d.l class's backgroundColor value 
     // alternative 2: hard code SVGs so JS can modify the source SVG colors
     document.querySelectorAll(`.${eyeDir}`).forEach(x => x.style.backgroundColor = newColor);
 }
-
-
 function setEyePalate(palateName) {
     if (!palateName) debugger; 
     else {
@@ -113,8 +99,6 @@ function setEyePalate(palateName) {
         setEyeColor(eyeDirections[i],colorsArr[i]);  
     })}
 }
-
-
 // procedural - parse eyeData, populating layerDiv with nine "eyeclouds" ordered by displayOrder 
 function buildEyeArrangement(eyeData, displayOrder, layerDiv) {
     let eyeArrangementFrag = document.createDocumentFragment();
@@ -192,40 +176,33 @@ let state = classes.includes('overlap-left') ? 'left' : classes.includes('overla
     }
     if (state == 'right') el.classList.toggle('overlap-right')
 }
-
-
-
 function clickedCloud(el, e) {
     if (e.shiftKey) cycleVMargin(el)
     else if (e.altKey) cycleHMargin(el)
     else rotateCloud(el);
 }
-
-
-
 // Rotate a cloud 1/4 turn
 function rotateCloud(el) {
+    let eyeDirections = ['o','u','r','d','l'];
+    let eyeValueMap = (eyeVal) => ({'o':0, 'u':1, 'r':2, 'd':3, 'l':4}[eyeVal]);
+
+    // rotation of an eye should change its relative value by +1 per 1/4 CW rotation, requiring color shift
     let rotations = Object.keys(clockwiseRotationCycle);
-    let newAngle = clockwiseRotationCycle[current];
-    el.classList.remove(current);
-    el.classList.add(newAngle);
     let current = Array.from(el.classList).find( className => rotations.includes(className) );
-    let offsetInt = { 'rotated_0':0, 'rotated_3':1, 'rotated_6':2, 'rotated_9':3 }[newAngle]
+    let newAngle = clockwiseRotationCycle[current];
     let colorInputs = document.getElementById('color-inputs').querySelectorAll('input');
     let colorInputsArr = Array.from(colorInputs).map(inputEl => inputEl.value);
-    let extendedColorCycleList = colorInputsArr.concat( colorInputsArr[1], colorInputsArr[2], colorInputsArr[3], colorInputsArr[4] )
-    extendedColorCycleList.map((colorVal, i) => {
-        let eyes = el.querySelectorAll('div')
-        eyes.forEach(eye => eye.style.backgroundColor = colorInputs[i + offsetInt]);
-    })
-    // 
+    let loopedColors = colorInputsArr.concat( colorInputsArr[1], colorInputsArr[2], colorInputsArr[3], colorInputsArr[4] );    
+    let offsetInt = { 'rotated_0':0, 'rotated_3':1, 'rotated_6':2, 'rotated_9':3 }[newAngle]
+    let eyes = el.querySelectorAll('div');
+    eyes.forEach(eye => {
+        let eyeDir = Array.from(eye.classList).find(eyeClass => eyeDirections.includes(eyeClass))
+        let shiftedValue = eyeValueMap(eyeDir) + offsetInt;
+        if (eyeDir != 'o') eye.style.backgroundColor = loopedColors[shiftedValue];            
+    });        
+    el.classList.remove(current);
+    el.classList.add(newAngle);
 }
-const findRotatedEyeDirColor = (dir, rotatedColor) => {
-    let c = [ '#ffffff', '#ffd700', '#00ff58', '#0028ff', '#ff00a7']
-}
-
-
-
 const getCurrentOrder = (eyeLayer) => {
     let order = ''
     let layer = eyeLayer || svgCloudsLeft;
@@ -234,13 +211,11 @@ const getCurrentOrder = (eyeLayer) => {
     })
     return order;
 }
-
 const saveOrder = () => {
     let order = getCurrentOrder();
     window.localStorage.setItem("eye-orders", order);
     messages.textContent = `Saved order to HTML5 local storage:\n ${order}`;
 }
-
 function toggleMirrorLayer(val) {
         let classes = Array.from(mirrorLayer.classList);
         if (classes.includes('cloned')) {
@@ -256,7 +231,6 @@ function toggleMirrorLayer(val) {
             changeSelectedLayer('2');
         }
 }
-
 function toggleRotatedMirroredLayer(val) {
     let classes = Array.from(rotatedMirrorLayer.classList);
     if (classes.includes('cloned')) {
@@ -275,8 +249,6 @@ function toggleRotatedMirroredLayer(val) {
         changeSelectedLayer('3');
     }
 }
-
-
 function readEyeData(eyeData) {
     let ret = {};
     let clouds = Object.keys(eyeData);
@@ -309,13 +281,10 @@ function readEyeData(eyeData) {
     console.table(ret)
     return ret;
 }
-
 buildEyeArrangement(eyeData, displayOrder, svgCloudsLeft);
 readEyeData(eyeData);
 
-
-
-
+// image uploading - adapted from MDN, needs cleanup
 function returnFileSize(number) {
     if (number < 1024) {
       return `${number} bytes`;
@@ -325,11 +294,8 @@ function returnFileSize(number) {
       return `${(number / 1048576).toFixed(1)} MB`;
     }
 }
-
-
 // https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types
 const fileTypes = [ "image/apng", "image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/svg+xml", "image/tiff", "image/webp", "image/x-icon", ];
-  
 function validFileType(file) {
 return fileTypes.includes(file.type);
 }
@@ -377,6 +343,8 @@ function addMovableImage(customImageLayer) {
 }
 
 }
+
+// DETAILS OPEN/CLOSE HANDLING - Needs tuning 
 // Fetch all the details element.
 const details = document.querySelectorAll("details");
 
